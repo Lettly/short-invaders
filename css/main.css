@@ -1,0 +1,57 @@
+@font-face{
+  font-family: '8bit-HUD';
+  src: url('../assets/fonts/8-bit-hud.ttf');
+}
+body {
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  font: 16px sans-serif;
+}
+header {
+  text-align: center;
+  background: black;
+  color: #fff;
+  padding: 10px;
+}
+.game-wrapper .control-buttons{
+  margin: auto auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 244px;
+}
+.control-buttons div{
+  height: 66px;
+  width: 66px;
+}
+.game{
+  width: 240px;
+  height: 480px;
+  margin: 10px auto 0 auto;
+  border: 2px black solid;
+  position: relative;
+}
+.game .points{
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  font-family: '8bit-HUD';
+  font-size: 5px;
+  color: #848d9f;
+}
+.game .player {
+  position: absolute;
+  margin-left: -30px;
+  width: 60px;
+}
+.game .bullet {
+  position: absolute;
+  margin-left: -10px;
+  height: 20px;
+}
+.game .enemy {
+  position: absolute;
+  margin-left: -15px;
+  width: 30px;
+}
