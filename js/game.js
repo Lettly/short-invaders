@@ -149,68 +149,103 @@ function updateBullets(dt, $container) {
     }
     // Set the bullet's position
     setPosition(bullet.$element, bullet.x, bullet.y);
-    // Get size and position relative to viewport
+    // Get size and position relative to viewport of bullet
     const r1 = bullet.$element.getBoundingClientRect();
     // Gets all the enemies stored in game state
     const enemies = GAME_STATE.enemies;
     // For each enemy
     for (let j = 0; j < enemies.length; j++) {
       const enemy = enemies[j];
+      // Check if the enemy is dead
       if (enemy.isDead) continue;
+      // Get size and position relative to viewport of enemy
       const r2 = enemy.$element.getBoundingClientRect();
+      // If enemy rectangle and bullet rectangle intersect
       if (rectsIntersect(r1, r2)) {
-        //Enemy hitted
+        // Destroy enemy and bullet
         destroyEnemy($container, enemy);
         destroyBullet($container, bullet);
         break;
       }
     }
   }
+  // Stores in the game state all the bullets that are still in game.
+  // This means bullets that have not hit anything or that have gone
+  // out of bounds.
   GAME_STATE.bullets = GAME_STATE.bullets.filter(e => !e.isDead);
 }
 
+// DESTROY BULLET
 function destroyBullet($container, bullet) {
+  // Removes bullet element
   $container.removeChild(bullet.$element);
+  // Sets the bullet's state to dead
   bullet.isDead = true;
 }
 
-//ENEMY SECTION
-let e420 = './assets/img/enemies/420.png';
-let eShort = './assets/img/enemies/short.png';
-let eCig = './assets/img/enemies/cig.png';
-let enemiesImg = [e420, eShort, eCig];
+// [ ENEMY SECTION ]
 
+// ENEMY IMAGES
+let e420 = './assets/img/enemies/420.png'; // 420 image
+let eShort = './assets/img/enemies/short.png'; // SHORT image
+let eCig = './assets/img/enemies/cig.png'; // CIGARETTE image
+let enemiesImg = [e420, eShort, eCig]; // Array of enemy images
+
+// CREATE ENEMIES
 function createEnemy($container, x, y) {
+  // Creates an image element and assigns a random src image and a predetermined class
   const $element = document.createElement('img');
+  // Chooses random image
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
   $element.className = 'enemy';
   $container.appendChild($element);
+  // Creates a constant with the enemy's position and element
   const enemy = { x, y, $element };
+  // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
+  // Sets the enemy's position
   setPosition($element, x, y);
 }
 
+// UPDATE ENEMIES
 function updateEnemies(dt, $container) {
+  // dx is the difference in the x coordinate since the last update
+  // Through this formula it allows for the movement of the enemies
+  // to oscillate back and forth thanks to the sinusoidal movement
+  // of the sine function.
   const dx = Math.sin(GAME_STATE.lastTime / 1000.0) * 20;
 
+  // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
+  // For each enemy
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
+    // Change the x position by adding dx
     const x = enemy.x + dx;
+    // The y coordinate remains unchanged
     const y = enemy.y;
+    // Sets new position
     setPosition(enemy.$element, x, y);
   }
+
+  // Updates the game state by filtering and eliminating all the dead enemies
   GAME_STATE.enemies = GAME_STATE.enemies.filter(e => !e.isDead)
 }
 
+// DESTROY ENEMY
 function destroyEnemy($container, enemy) {
+  // Removes the enemy
   $container.removeChild(enemy.$element);
+  // Sets its state to dead
   enemy.isDead = true;
+  // Adds one point
   GAME_STATE.points += 1;
 }
 
+// [ MAIN SECTION ]
 
-//MAIN SECTION
+// INIT
+// Initializer function, to be called on load
 function init() {
   const $container = document.querySelector('.game');
   createPlayer($container);
@@ -231,7 +266,7 @@ function init() {
   $lives.innerHTML = GAME_STATE.lives;
 }
 
-//UPDATE FUNCTION
+// UPDATE FUNCTION
 function update() {
   const curretTime = Date.now();
   const dt = (curretTime - GAME_STATE.lastTime) / 1000;
@@ -248,6 +283,8 @@ function update() {
   window.requestAnimationFrame(update);
 }
 
+// EVENTS
+// To be called on load, it stores all the button press events
 function events() {
   //GETTING INPUT SECTION
   function keyDown(k) {
@@ -274,40 +311,40 @@ function events() {
   window.addEventListener('keydown', keyDown);
   window.addEventListener('keyup', keyUp);
   //Buttons
-  document.getElementById('leftB').addEventListener('touchstart', function () {
+  document.getElementById('leftB').addEventListener('touchstart', function() {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById('leftB').addEventListener('touchend', function () {
+  document.getElementById('leftB').addEventListener('touchend', function() {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('leftB').addEventListener('mousedown', function () {
+  document.getElementById('leftB').addEventListener('mousedown', function() {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById('leftB').addEventListener('mouseup', function () {
+  document.getElementById('leftB').addEventListener('mouseup', function() {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('rightB').addEventListener('touchstart', function () {
+  document.getElementById('rightB').addEventListener('touchstart', function() {
     GAME_STATE.rightPressed = true;
   });
-  document.getElementById('rightB').addEventListener('touchend', function () {
+  document.getElementById('rightB').addEventListener('touchend', function() {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('rightB').addEventListener('mousedown', function () {
+  document.getElementById('rightB').addEventListener('mousedown', function() {
     GAME_STATE.rightPressed = true;
   });
-  document.getElementById('rightB').addEventListener('mouseup', function () {
+  document.getElementById('rightB').addEventListener('mouseup', function() {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('spaceB').addEventListener('touchstart', function () {
+  document.getElementById('spaceB').addEventListener('touchstart', function() {
     GAME_STATE.spacePressed = true;
   });
-  document.getElementById('spaceB').addEventListener('touchend', function () {
+  document.getElementById('spaceB').addEventListener('touchend', function() {
     GAME_STATE.spacePressed = false;
   });
-  document.getElementById('spaceB').addEventListener('mousedown', function () {
+  document.getElementById('spaceB').addEventListener('mousedown', function() {
     GAME_STATE.spacePressed = true;
   });
-  document.getElementById('spaceB').addEventListener('mouseup', function () {
+  document.getElementById('spaceB').addEventListener('mouseup', function() {
     GAME_STATE.spacePressed = false;
   });
   // ------------------- //
