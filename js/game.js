@@ -17,6 +17,9 @@ const ENEMY_HORIZONTAL_P = 40;
 const ENEMY_VERTICAL_P = 60;
 const ENEMY_VERTICAL_S = 50;
 
+const Q_ENEMIES_LVL_1 = 5; //Quantity of enemies on level 1
+const S_ENEMIES_LVL_1 = 50; //Speed of enemies on level 1
+
 //GAME PROPERTIES
 const GAME_STATE = {
   lastTime: Date.now(),
@@ -165,6 +168,8 @@ function updateBullets(dt, $container) {
         // Destroy enemy and bullet
         destroyEnemy($container, enemy);
         destroyBullet($container, bullet);
+        // Adds one point
+        GAME_STATE.points += 1;
         break;
       }
     }
@@ -209,11 +214,8 @@ function createEnemy($container, x, y) {
 
 // UPDATE ENEMIES
 function updateEnemies(dt, $container) {
-  // dx is the difference in the x coordinate since the last update
-  // Through this formula it allows for the movement of the enemies
-  // to oscillate back and forth thanks to the sinusoidal movement
-  // of the sine function.
-  const dx = Math.sin(GAME_STATE.lastTime / 1000.0) * 20;
+  //dy allow the enemy to drop himself down to the player.
+  const dy = dt * S_ENEMIES_LVL_1;
 
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
@@ -221,9 +223,15 @@ function updateEnemies(dt, $container) {
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
     // Change the x position by adding dx
-    const x = enemy.x + dx;
-    // The y coordinate remains unchanged
-    const y = enemy.y;
+    const x = enemy.x;
+    // Change the y position by adding dy
+    const y = enemy.y += dy;
+    if (y > GAME_HEIGHT) {
+      // Destroy enemy
+      destroyEnemy($container, enemy);
+      // Remove one life
+      GAME_STATE.lives -= 1;
+    }
     // Sets new position
     setPosition(enemy.$element, x, y);
   }
@@ -238,8 +246,6 @@ function destroyEnemy($container, enemy) {
   $container.removeChild(enemy.$element);
   // Sets its state to dead
   enemy.isDead = true;
-  // Adds one point
-  GAME_STATE.points += 1;
 }
 
 // [ MAIN SECTION ]
@@ -250,13 +256,10 @@ function init() {
   const $container = document.querySelector('.game');
   createPlayer($container);
 
-  const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_P * 2) / (ENEMIES_ROW - 1);
-  for (let j = 0; j < 3; j++) {
-    const y = ENEMY_VERTICAL_P + j * ENEMY_VERTICAL_S;
-    for (let i = 0; i < ENEMIES_ROW; i++) {
-      const x = i * enemySpacing + ENEMY_HORIZONTAL_P;
-      createEnemy($container, x, y);
-    }
+  for (let i = 0; i < Q_ENEMIES_LVL_1; i++) {
+    const y = 40;
+    const x = Math.floor(Math.random() * GAME_WIDTH);
+    createEnemy($container, x, y);
   }
 
   const $points = document.getElementById('game-points');
@@ -278,6 +281,9 @@ function update() {
 
   const $points = document.getElementById('game-points');
   $points.innerHTML = GAME_STATE.points;
+
+  const $lives = document.getElementById('game-lives');
+  $lives.innerHTML = GAME_STATE.lives;
 
   GAME_STATE.lastTime = curretTime;
   window.requestAnimationFrame(update);
@@ -311,40 +317,40 @@ function events() {
   window.addEventListener('keydown', keyDown);
   window.addEventListener('keyup', keyUp);
   //Buttons
-  document.getElementById('leftB').addEventListener('touchstart', function() {
+  document.getElementById('leftB').addEventListener('touchstart', function () {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById('leftB').addEventListener('touchend', function() {
+  document.getElementById('leftB').addEventListener('touchend', function () {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('leftB').addEventListener('mousedown', function() {
+  document.getElementById('leftB').addEventListener('mousedown', function () {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById('leftB').addEventListener('mouseup', function() {
+  document.getElementById('leftB').addEventListener('mouseup', function () {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('rightB').addEventListener('touchstart', function() {
+  document.getElementById('rightB').addEventListener('touchstart', function () {
     GAME_STATE.rightPressed = true;
   });
-  document.getElementById('rightB').addEventListener('touchend', function() {
+  document.getElementById('rightB').addEventListener('touchend', function () {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('rightB').addEventListener('mousedown', function() {
+  document.getElementById('rightB').addEventListener('mousedown', function () {
     GAME_STATE.rightPressed = true;
   });
-  document.getElementById('rightB').addEventListener('mouseup', function() {
+  document.getElementById('rightB').addEventListener('mouseup', function () {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('spaceB').addEventListener('touchstart', function() {
+  document.getElementById('spaceB').addEventListener('touchstart', function () {
     GAME_STATE.spacePressed = true;
   });
-  document.getElementById('spaceB').addEventListener('touchend', function() {
+  document.getElementById('spaceB').addEventListener('touchend', function () {
     GAME_STATE.spacePressed = false;
   });
-  document.getElementById('spaceB').addEventListener('mousedown', function() {
+  document.getElementById('spaceB').addEventListener('mousedown', function () {
     GAME_STATE.spacePressed = true;
   });
-  document.getElementById('spaceB').addEventListener('mouseup', function() {
+  document.getElementById('spaceB').addEventListener('mouseup', function () {
     GAME_STATE.spacePressed = false;
   });
   // ------------------- //
