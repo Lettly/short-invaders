@@ -258,9 +258,37 @@ function init() {
   // Creates the player
   createPlayer($container);
 
+  // Array that stores all the x coordinates to avoid repetition
+  var arrX = []
+
+  // For the quantity of enemies on level 1
   for (let i = 0; i < Q_ENEMIES_LVL_1; i++) {
+    // Distance from the top
     const y = 40;
-    const x = Math.floor(Math.random() * GAME_WIDTH);
+    // X coordinate
+    var x = 0;
+    // Boolean repetition flag
+    var repetition = true;
+    // Boolean flag put in place in case elements are too close
+    var tooClose = 0;
+    // If there is any repetition keep creating values until there is none
+    while (repetition && !tooClose) {
+      // Set a random x coordinate
+      x = Math.floor(Math.random() * GAME_WIDTH);
+      if (!arrX.includes(x)) {
+        repetition = false;
+      }
+
+      for(let j = 0; j < arrX.length; j++) {
+        if (abs(arrX[j] - x) < 30) {
+          tooClose++;
+        }
+      }
+      if (tooClose == 1){
+        tooClose = 0;
+      }
+    }    
+    // Create an enemy at the previously set x and y coordinates
     createEnemy($container, x, y);
   }
 
