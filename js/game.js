@@ -17,6 +17,9 @@ const ENEMY_HORIZONTAL_PADDING = 40;
 const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
 
+const Q_ENEMIES_LVL_1 = 5; //Quantity of enemies on level 1
+const S_ENEMIES_LVL_1 = 50; //Speed of enemies on level 1
+
 //GAME PROPERTIES
 const GAME_STATE = {
   lastTime: Date.now(),
@@ -165,6 +168,8 @@ function updateBullets(dt, $container) {
         // Destroy enemy and bullet
         destroyEnemy($container, enemy);
         destroyBullet($container, bullet);
+        // Adds one point
+        GAME_STATE.points += 1;
         break;
       }
     }
@@ -209,11 +214,8 @@ function createEnemy($container, x, y) {
 
 // UPDATE ENEMIES
 function updateEnemies(dt, $container) {
-  // dx is the difference in the x coordinate since the last update
-  // Through this formula it allows for the movement of the enemies
-  // to oscillate back and forth thanks to the sinusoidal movement
-  // of the sine function.
-  const dx = Math.sin(GAME_STATE.lastTime / 1000.0) * 20;
+  //dy allow the enemy to drop himself down to the player.
+  const dy = dt * S_ENEMIES_LVL_1;
 
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
@@ -221,9 +223,15 @@ function updateEnemies(dt, $container) {
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
     // Change the x position by adding dx
-    const x = enemy.x + dx;
-    // The y coordinate remains unchanged
-    const y = enemy.y;
+    const x = enemy.x;
+    // Change the y position by adding dy
+    const y = enemy.y += dy;
+    if (y > GAME_HEIGHT) {
+      // Destroy enemy
+      destroyEnemy($container, enemy);
+      // Remove one life
+      GAME_STATE.lives -= 1;
+    }
     // Sets new position
     setPosition(enemy.$element, x, y);
   }
@@ -238,8 +246,6 @@ function destroyEnemy($container, enemy) {
   $container.removeChild(enemy.$element);
   // Sets its state to dead
   enemy.isDead = true;
-  // Adds one point
-  GAME_STATE.points += 1;
 }
 
 // [ MAIN SECTION ]
@@ -252,18 +258,10 @@ function init() {
   // Creates the player
   createPlayer($container);
 
-  // Calculates the spacing based on the number of enemies and the container width
-  const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) / (ENEMIES_ROW - 1);
-  // For three rows
-  for (let j = 0; j < 3; j++) {
-    // Calculates the y position based on the padding, the row number and the size
-    const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SIZE;
-    for (let i = 0; i < ENEMIES_ROW; i++) {
-      // Calculates the x position based on the padding the column number and the size
-      const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
-      // Creates the enemy
-      createEnemy($container, x, y);
-    }
+  for (let i = 0; i < Q_ENEMIES_LVL_1; i++) {
+    const y = 40;
+    const x = Math.floor(Math.random() * GAME_WIDTH);
+    createEnemy($container, x, y);
   }
 
   // Gets the points HTML element
@@ -295,6 +293,9 @@ function update() {
   $points.innerHTML = GAME_STATE.points;
 
   // Sets the last frame timestamp as the current one before requesting new frame
+  const $lives = document.getElementById('game-lives');
+  $lives.innerHTML = GAME_STATE.lives;
+
   GAME_STATE.lastTime = curretTime;
   window.requestAnimationFrame(update);
 }
