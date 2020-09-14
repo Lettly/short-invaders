@@ -13,9 +13,9 @@ const LASER_MAX_SPEED = 300;
 const LASER_COOLDOWN = 0.3;
 //Enemies
 const ENEMIES_ROW = 5; // Number of enemies per row
-const ENEMY_HORIZONTAL_P = 40;
-const ENEMY_VERTICAL_P = 60;
-const ENEMY_VERTICAL_S = 50;
+const ENEMY_HORIZONTAL_PADDING = 40;
+const ENEMY_VERTICAL_PADDING = 60;
+const ENEMY_VERTICAL_SIZE = 50;
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -247,38 +247,54 @@ function destroyEnemy($container, enemy) {
 // INIT
 // Initializer function, to be called on load
 function init() {
+  // Selects the container
   const $container = document.querySelector('.game');
+  // Creates the player
   createPlayer($container);
 
-  const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_P * 2) / (ENEMIES_ROW - 1);
+  // Calculates the spacing based on the number of enemies and the container width
+  const enemySpacing = (GAME_WIDTH - ENEMY_HORIZONTAL_PADDING * 2) / (ENEMIES_ROW - 1);
+  // For three rows
   for (let j = 0; j < 3; j++) {
-    const y = ENEMY_VERTICAL_P + j * ENEMY_VERTICAL_S;
+    // Calculates the y position based on the padding, the row number and the size
+    const y = ENEMY_VERTICAL_PADDING + j * ENEMY_VERTICAL_SIZE;
     for (let i = 0; i < ENEMIES_ROW; i++) {
-      const x = i * enemySpacing + ENEMY_HORIZONTAL_P;
+      // Calculates the x position based on the padding the column number and the size
+      const x = i * enemySpacing + ENEMY_HORIZONTAL_PADDING;
+      // Creates the enemy
       createEnemy($container, x, y);
     }
   }
 
+  // Gets the points HTML element
   const $points = document.getElementById('game-points');
+  // Displays the news value
   $points.innerHTML = GAME_STATE.points;
 
+  // Gets the number of lives HTML elements
   const $lives = document.getElementById('game-lives');
+  // Displays the new value
   $lives.innerHTML = GAME_STATE.lives;
 }
 
 // UPDATE FUNCTION
+// This function runs every frame
 function update() {
   const curretTime = Date.now();
+  // Calculates the time difference between the last frame and this one
   const dt = (curretTime - GAME_STATE.lastTime) / 1000;
 
+  // Selects the game container and updates the whole game
   const $container = document.querySelector('.game');
   updatePlayer(dt, $container);
   updateBullets(dt, $container);
   updateEnemies(dt, $container);
 
+  // Updates the points display
   const $points = document.getElementById('game-points');
   $points.innerHTML = GAME_STATE.points;
 
+  // Sets the last frame timestamp as the current one before requesting new frame
   GAME_STATE.lastTime = curretTime;
   window.requestAnimationFrame(update);
 }
