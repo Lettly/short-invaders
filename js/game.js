@@ -128,7 +128,7 @@ function createBullet($container, x, y) {
   // Sets the bullet position
   setPosition($element, x, y);
   // Loads sound effect
-  const audio = new Audio('../assets/sounds/laser.ogg');
+  const audio = new Audio('./assets/sounds/laser.ogg');
   // Plays sound effect
   audio.play();
 }
