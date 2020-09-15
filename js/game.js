@@ -209,8 +209,9 @@ function createEnemy($container, x, y) {
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
   $element.className = "enemy";
   $container.appendChild($element);
+  var speed = Math.abs(Math.floor(Math.random() * 40));
   // Creates a constant with the enemy's position and element
-  const enemy = { x, y, $element };
+  const enemy = { x, y, $element, speed };
   // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
   // Sets the enemy's position
@@ -219,16 +220,19 @@ function createEnemy($container, x, y) {
 
 // UPDATE ENEMIES
 function updateEnemies(dt, $container) {
-  //dy allow the enemy to drop himself down to the player.
-  const dy = dt * S_ENEMIES_LVL_1;
-
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
+  // Dy allows the enemy to drop himself down to the player.
+  const dy = dt * S_ENEMIES_LVL_1;
   // For each enemy
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
     // Change the x position by adding dx
-    const x = enemy.x;
+    const dx = dt * enemy.speed;
+    if(enemy.x + dx >= 200){
+      enemy.speed = enemy.speed * -1;
+    }
+    const x = (enemy.x += dx);
     // Change the y position by adding dy
     const y = (enemy.y += dy);
     if (y > GAME_HEIGHT) {
