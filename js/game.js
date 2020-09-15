@@ -1,24 +1,24 @@
-//Keyboard keycodes, they are stored as constants to avoid unnecessary hard coding
+// Keyboard keycodes, they are stored as constants to avoid unnecessary hard coding
 const KEY_CODE_LEFT = 37; // LEFT ARROW KEY (move left)
 const KEY_CODE_RIGHT = 39; // RIGHT ARROW KEY (move right)
 const KEY_CODE_SPACE = 32; // SPACE KEY (shoot)
-//Gamebox dimensions, all dimensions are in pixels
+// Gamebox dimensions, all dimensions are in pixels
 const GAME_WIDTH = 240;
 const GAME_HEIGHT = 480;
 //Player (Tesla)
 const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
-//Bullets (Tesla logo)
+// Bullets (Tesla logo)
 const LASER_MAX_SPEED = 300;
 const LASER_COOLDOWN = 0.3;
-//Enemies
+// Enemies
 const ENEMIES_ROW = 5; // Number of enemies per row
 const ENEMY_HORIZONTAL_PADDING = 40;
 const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
-
-const Q_ENEMIES_LVL_1 = 5; //Quantity of enemies on level 1
-const S_ENEMIES_LVL_1 = 50; //Speed of enemies on level 1
+// Level parameters
+const Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
+const S_ENEMIES_LVL_1 = 50; // Speed of enemies on level 1
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -259,35 +259,36 @@ function init() {
   createPlayer($container);
 
   // Array that stores all the x coordinates to avoid repetition
-  var arrX = []
+  var arrX = [];
 
   // For the quantity of enemies on level 1
   for (let i = 0; i < Q_ENEMIES_LVL_1; i++) {
     // Distance from the top
-    const y = 40;
+    const y = 25 + Math.floor(Math.random() * 30);
     // X coordinate
     var x = 0;
-    // Boolean repetition flag
-    var repetition = true;
-    // Boolean flag put in place in case elements are too close
-    var tooClose = 0;
-    // If there is any repetition keep creating values until there is none
-    while (repetition && !tooClose) {
-      // Set a random x coordinate
-      x = Math.floor(Math.random() * GAME_WIDTH);
-      if (!arrX.includes(x)) {
-        repetition = false;
-      }
+    // Validity flag
+    var isValid = false;
 
-      for(let j = 0; j < arrX.length; j++) {
-        if (abs(arrX[j] - x) < 30) {
-          tooClose++;
+    if (i > 0) {
+      isValid = false;
+      while (!isValid) {
+        var isGood = 0;
+        x = 40 + Math.floor(Math.random() * 160);
+        for (let j = 0; j < arrX.length; j++) {
+          if (Math.abs(arrX[j] - x) > 15) {
+            isGood++;
+          }
+        }
+        if (isGood == arrX.length) {
+          isValid = true;
         }
       }
-      if (tooClose == 1){
-        tooClose = 0;
-      }
-    }    
+    } else {
+      // Set a random x coordinate
+      x = 40 + Math.floor(Math.random() * 160);
+    }
+    arrX.push(x);
     // Create an enemy at the previously set x and y coordinates
     createEnemy($container, x, y);
   }
@@ -306,9 +307,9 @@ function init() {
 // UPDATE FUNCTION
 // This function runs every frame
 function update() {
-  const curretTime = Date.now();
+  const currentTime = Date.now();
   // Calculates the time difference between the last frame and this one
-  const dt = (curretTime - GAME_STATE.lastTime) / 1000;
+  const dt = (currentTime - GAME_STATE.lastTime) / 1000;
 
   // Selects the game container and updates the whole game
   const $container = document.querySelector('.game');
@@ -324,7 +325,7 @@ function update() {
   const $lives = document.getElementById('game-lives');
   $lives.innerHTML = GAME_STATE.lives;
 
-  GAME_STATE.lastTime = curretTime;
+  GAME_STATE.lastTime = currentTime;
   window.requestAnimationFrame(update);
 }
 
