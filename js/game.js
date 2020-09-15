@@ -229,7 +229,7 @@ function updateEnemies(dt, $container) {
     const enemy = enemies[i];
     // Change the x position by adding dx
     const dx = dt * enemy.speed;
-    if(enemy.x + dx >= 200){
+    if(enemy.x + dx >= 200 || enemy.x + dx <= 40){
       enemy.speed = enemy.speed * -1;
     }
     const x = (enemy.x += dx);
