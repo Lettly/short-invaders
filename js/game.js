@@ -10,7 +10,7 @@ const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
 // Bullets (Tesla logo)
 const LASER_MAX_SPEED = 300;
-const LASER_COOLDOWN = 0.5;
+const LASER_COOLDOWN = 1;
 // Enemies
 const ENEMIES_ROW = 5; // Number of enemies per row
 const ENEMY_HORIZONTAL_PADDING = 40;
@@ -18,7 +18,7 @@ const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
 // Level parameters
 const Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
-const S_ENEMIES_LVL_1 = 30; // Speed of enemies on level 1
+const S_ENEMIES_LVL_1 = 15; // Speed of enemies on level 1
 
 //GAME PROPERTIES
 const GAME_STATE = {
