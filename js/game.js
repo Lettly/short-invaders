@@ -285,7 +285,7 @@ function init() {
         var isGood = 0;
         x = 40 + Math.floor(Math.random() * 160);
         for (let j = 0; j < arrX.length; j++) {
-          if (Math.abs(arrX[j] - x) > 15) {
+          if (Math.abs(arrX[j] - x) > 25) {
             isGood++;
           }
         }
