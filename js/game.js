@@ -32,7 +32,7 @@ const GAME_STATE = {
   bullets: [],
   enemies: [],
   points: 0,
-  lives: 5
+  lives: 5,
 };
 
 // CHECK RECTANGLES INTERSECTION
@@ -71,9 +71,9 @@ function clamp(v, min, max) {
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / 2;
   GAME_STATE.playerY = GAME_HEIGHT - 40;
-  const $player = document.createElement('img');
-  $player.src = './assets/img/objects/car.png';
-  $player.className = 'player';
+  const $player = document.createElement("img");
+  $player.src = "./assets/img/objects/car.png";
+  $player.className = "player";
   $container.appendChild($player);
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -81,7 +81,8 @@ function createPlayer($container) {
 // UPDATE PLAYER
 // This function takes care of updating the player's game state
 function updatePlayer(dt, $container) {
-  if (GAME_STATE.leftPressed) { // If left arrow key is pressed
+  if (GAME_STATE.leftPressed) {
+    // If left arrow key is pressed
     // Change x position by a set number of pixels based on time elapsed since last update
     GAME_STATE.playerX -= dt * PLAYER_MAX_SPEED;
   }
@@ -93,7 +94,11 @@ function updatePlayer(dt, $container) {
 
   // Passes the calculated value made by the if statements above to the clamp function
   // with the purpose of checking if the value is within the game area boundaries
-  GAME_STATE.playerX = clamp(GAME_STATE.playerX, PLAYER_WIDTH / 2, GAME_WIDTH - PLAYER_WIDTH / 2);
+  GAME_STATE.playerX = clamp(
+    GAME_STATE.playerX,
+    PLAYER_WIDTH / 2,
+    GAME_WIDTH - PLAYER_WIDTH / 2
+  );
 
   // If the space key is pressed and the shooting cooldown time has elapsed
   if (GAME_STATE.spacePressed && GAME_STATE.playerCooldown <= 0) {
@@ -110,7 +115,7 @@ function updatePlayer(dt, $container) {
   }
 
   // Select player element from document
-  const $player = document.querySelector('.player');
+  const $player = document.querySelector(".player");
   // Set new player position
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
@@ -120,9 +125,9 @@ function updatePlayer(dt, $container) {
 // CREATE BULLET
 function createBullet($container, x, y) {
   // Creates image element and assigns it the correct png and class
-  const $element = document.createElement('img');
-  $element.src = './assets/img/objects/bullet.png'
-  $element.className = 'bullet';
+  const $element = document.createElement("img");
+  $element.src = "./assets/img/objects/bullet.png";
+  $element.className = "bullet";
   $container.appendChild($element);
   // Creates a constant containing position and bullet element
   const bullet = { x, y, $element };
@@ -131,7 +136,7 @@ function createBullet($container, x, y) {
   // Sets the bullet position
   setPosition($element, x, y);
   // Loads sound effect
-  const audio = new Audio('./assets/sounds/laser.ogg');
+  const audio = new Audio("./assets/sounds/laser.ogg");
   // Plays sound effect
   audio.play();
 }
@@ -177,7 +182,7 @@ function updateBullets(dt, $container) {
   // Stores in the game state all the bullets that are still in game.
   // This means bullets that have not hit anything or that have gone
   // out of bounds.
-  GAME_STATE.bullets = GAME_STATE.bullets.filter(e => !e.isDead);
+  GAME_STATE.bullets = GAME_STATE.bullets.filter((e) => !e.isDead);
 }
 
 // DESTROY BULLET
@@ -191,18 +196,18 @@ function destroyBullet($container, bullet) {
 // [ ENEMY SECTION ]
 
 // ENEMY IMAGES
-let e420 = './assets/img/enemies/420.png'; // 420 image
-let eShort = './assets/img/enemies/short.png'; // SHORT image
-let eCig = './assets/img/enemies/cig.png'; // CIGARETTE image
+let e420 = "./assets/img/enemies/420.png"; // 420 image
+let eShort = "./assets/img/enemies/short.png"; // SHORT image
+let eCig = "./assets/img/enemies/cig.png"; // CIGARETTE image
 let enemiesImg = [e420, eShort, eCig]; // Array of enemy images
 
 // CREATE ENEMIES
 function createEnemy($container, x, y) {
   // Creates an image element and assigns a random src image and a predetermined class
-  const $element = document.createElement('img');
+  const $element = document.createElement("img");
   // Chooses random image
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
-  $element.className = 'enemy';
+  $element.className = "enemy";
   $container.appendChild($element);
   // Creates a constant with the enemy's position and element
   const enemy = { x, y, $element };
@@ -225,7 +230,7 @@ function updateEnemies(dt, $container) {
     // Change the x position by adding dx
     const x = enemy.x;
     // Change the y position by adding dy
-    const y = enemy.y += dy;
+    const y = (enemy.y += dy);
     if (y > GAME_HEIGHT) {
       // Destroy enemy
       destroyEnemy($container, enemy);
@@ -237,7 +242,7 @@ function updateEnemies(dt, $container) {
   }
 
   // Updates the game state by filtering and eliminating all the dead enemies
-  GAME_STATE.enemies = GAME_STATE.enemies.filter(e => !e.isDead)
+  GAME_STATE.enemies = GAME_STATE.enemies.filter((e) => !e.isDead);
 }
 
 // DESTROY ENEMY
@@ -307,25 +312,25 @@ function init() {
 // UPDATE FUNCTION
 // This function runs every frame
 function update() {
-  const currentTime = Date.now();
+  const curretTime = Date.now();
   // Calculates the time difference between the last frame and this one
-  const dt = (currentTime - GAME_STATE.lastTime) / 1000;
+  const dt = (curretTime - GAME_STATE.lastTime) / 1000;
 
   // Selects the game container and updates the whole game
-  const $container = document.querySelector('.game');
+  const $container = document.querySelector(".game");
   updatePlayer(dt, $container);
   updateBullets(dt, $container);
   updateEnemies(dt, $container);
 
   // Updates the points display
-  const $points = document.getElementById('game-points');
+  const $points = document.getElementById("game-points");
   $points.innerHTML = GAME_STATE.points;
 
   // Sets the last frame timestamp as the current one before requesting new frame
-  const $lives = document.getElementById('game-lives');
+  const $lives = document.getElementById("game-lives");
   $lives.innerHTML = GAME_STATE.lives;
 
-  GAME_STATE.lastTime = currentTime;
+  GAME_STATE.lastTime = curretTime;
   window.requestAnimationFrame(update);
 }
 
@@ -354,43 +359,53 @@ function events() {
   }
 
   //Keyboard
-  window.addEventListener('keydown', keyDown);
-  window.addEventListener('keyup', keyUp);
+  window.addEventListener("keydown", keyDown);
+  window.addEventListener("keyup", keyUp);
   //Buttons
-  document.getElementById('leftB').addEventListener('touchstart', function() {
-    GAME_STATE.leftPressed = true;
-  });
-  document.getElementById('leftB').addEventListener('touchend', function() {
+  document
+    .getElementById("leftB")
+    .addEventListener("touchstart", function() {
+      GAME_STATE.leftPressed = true;
+    });
+  document.getElementById("leftB").addEventListener("touchend", function() {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('leftB').addEventListener('mousedown', function() {
+  document.getElementById("leftB").addEventListener("mousedown", function() {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById('leftB').addEventListener('mouseup', function() {
+  document.getElementById("leftB").addEventListener("mouseup", function() {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById('rightB').addEventListener('touchstart', function() {
-    GAME_STATE.rightPressed = true;
-  });
-  document.getElementById('rightB').addEventListener('touchend', function() {
+  document
+    .getElementById("rightB")
+    .addEventListener("touchstart", function() {
+      GAME_STATE.rightPressed = true;
+    });
+  document.getElementById("rightB").addEventListener("touchend", function() {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('rightB').addEventListener('mousedown', function() {
-    GAME_STATE.rightPressed = true;
-  });
-  document.getElementById('rightB').addEventListener('mouseup', function() {
+  document
+    .getElementById("rightB")
+    .addEventListener("mousedown", function() {
+      GAME_STATE.rightPressed = true;
+    });
+  document.getElementById("rightB").addEventListener("mouseup", function() {
     GAME_STATE.rightPressed = false;
   });
-  document.getElementById('spaceB').addEventListener('touchstart', function() {
-    GAME_STATE.spacePressed = true;
-  });
-  document.getElementById('spaceB').addEventListener('touchend', function() {
+  document
+    .getElementById("spaceB")
+    .addEventListener("touchstart", function() {
+      GAME_STATE.spacePressed = true;
+    });
+  document.getElementById("spaceB").addEventListener("touchend", function() {
     GAME_STATE.spacePressed = false;
   });
-  document.getElementById('spaceB').addEventListener('mousedown', function() {
-    GAME_STATE.spacePressed = true;
-  });
-  document.getElementById('spaceB').addEventListener('mouseup', function() {
+  document
+    .getElementById("spaceB")
+    .addEventListener("mousedown", function() {
+      GAME_STATE.spacePressed = true;
+    });
+  document.getElementById("spaceB").addEventListener("mouseup", function() {
     GAME_STATE.spacePressed = false;
   });
   // ------------------- //
@@ -399,3 +414,31 @@ function events() {
 events();
 init();
 window.requestAnimationFrame(update);
+
+
+// ScoreBoard Login //
+const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; //Url of the backend server
+
+function setScore(score, name) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.open(
+    "POST",
+    SCOREBOARD_SERVER_IP + `/setScore.php?score=${score}&name=${name}`,
+    true
+  );
+  xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+}
+
+function getScoreBorad() {
+  var xmlhttp = new XMLHttpRequest();
+  var url = SCOREBOARD_SERVER_IP + `/getScoreBoard.php`;
+
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var myArr = JSON.parse(this.responseText);
+      console.log(myArr.data);
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+}
