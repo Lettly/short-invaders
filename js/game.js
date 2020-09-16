@@ -10,7 +10,7 @@ const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
 // Bullets (Tesla logo)
 const LASER_MAX_SPEED = 300;
-const LASER_COOLDOWN = 0.3;
+const LASER_COOLDOWN = 1;
 // Enemies
 const ENEMIES_ROW = 5; // Number of enemies per row
 const ENEMY_HORIZONTAL_PADDING = 40;
@@ -211,6 +211,7 @@ function createEnemy($container, x, y, lives) {
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
   $element.className = "enemy";
   $container.appendChild($element);
+  var speed = Math.abs(Math.floor(Math.random() * 40));
   // Creates a constant with the enemy's position and element
   const enemy = { x, y, $element, lives };
   // Pushes the enemy to game state
@@ -221,16 +222,19 @@ function createEnemy($container, x, y, lives) {
 
 // UPDATE ENEMIES
 function updateEnemies(dt, $container) {
-  //dy allow the enemy to drop himself down to the player.
-  const dy = dt * S_ENEMIES_LVL_1;
-
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
+  // Dy allows the enemy to drop himself down to the player.
+  const dy = dt * S_ENEMIES_LVL_1;
   // For each enemy
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
     // Change the x position by adding dx
-    const x = enemy.x;
+    const dx = dt * enemy.speed;
+    if (enemy.x + dx >= 200 || enemy.x + dx <= 40) {
+      enemy.speed = enemy.speed * -1;
+    }
+    const x = (enemy.x += dx);
     // Change the y position by adding dy
     const y = (enemy.y += dy);
     if (y > GAME_HEIGHT) {
@@ -283,7 +287,7 @@ function init() {
         var isGood = 0;
         x = 40 + Math.floor(Math.random() * 160);
         for (let j = 0; j < arrX.length; j++) {
-          if (Math.abs(arrX[j] - x) > 15) {
+          if (Math.abs(arrX[j] - x) > 25) {
             isGood++;
           }
         }
