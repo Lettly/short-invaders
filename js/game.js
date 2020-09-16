@@ -17,8 +17,8 @@ const ENEMY_HORIZONTAL_PADDING = 40;
 const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
 // Level parameters
-const Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
-const S_ENEMIES_LVL_1 = 15; // Speed of enemies on level 1
+var Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
+var S_ENEMIES_LVL_1 = 15; // Speed of enemies on level 1
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -170,21 +170,23 @@ function updateBullets(dt, $container) {
       const r2 = enemy.$element.getBoundingClientRect();
       // If enemy rectangle and bullet rectangle intersect
       if (rectsIntersect(r1, r2)) {
-        // Destroy enemy and bullet
-        destroyEnemy($container, enemy);
-        destroyBullet($container, bullet);
+        enemy.lives -= 1;
         // Adds one point
-        GAME_STATE.points += 1;
+        destroyBullet($container, bullet);
+        if (enemy.lives === 0) {
+          // Destroy enemy and bullet
+          destroyEnemy($container, enemy);
+          GAME_STATE.points += 1;
+        }
         break;
       }
     }
+    // Stores in the game state all the bullets that are still in game.
+    // This means bullets that have not hit anything or that have gone
+    // out of bounds.
+    GAME_STATE.bullets = GAME_STATE.bullets.filter((e) => !e.isDead);
   }
-  // Stores in the game state all the bullets that are still in game.
-  // This means bullets that have not hit anything or that have gone
-  // out of bounds.
-  GAME_STATE.bullets = GAME_STATE.bullets.filter((e) => !e.isDead);
 }
-
 // DESTROY BULLET
 function destroyBullet($container, bullet) {
   // Removes bullet element
@@ -202,16 +204,16 @@ let eCig = "./assets/img/enemies/cig.png"; // CIGARETTE image
 let enemiesImg = [e420, eShort, eCig]; // Array of enemy images
 
 // CREATE ENEMIES
-function createEnemy($container, x, y) {
+function createEnemy($container, x, y, lives) {
   // Creates an image element and assigns a random src image and a predetermined class
   const $element = document.createElement("img");
   // Chooses random image
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
   $element.className = "enemy";
   $container.appendChild($element);
-  var speed = Math.abs(Math.floor(Math.random() * 40));
+  var speed = Math.abs(10 + Math.floor(Math.random() * 20));
   // Creates a constant with the enemy's position and element
-  const enemy = { x, y, $element, speed };
+  const enemy = { x, y, $element, lives, speed };
   // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
   // Sets the enemy's position
@@ -229,7 +231,7 @@ function updateEnemies(dt, $container) {
     const enemy = enemies[i];
     // Change the x position by adding dx
     const dx = dt * enemy.speed;
-    if(enemy.x + dx >= 200 || enemy.x + dx <= 40){
+    if (enemy.x + dx >= 200 || enemy.x + dx <= 40) {
       enemy.speed = enemy.speed * -1;
     }
     const x = (enemy.x += dx);
@@ -299,7 +301,7 @@ function init() {
     }
     arrX.push(x);
     // Create an enemy at the previously set x and y coordinates
-    createEnemy($container, x, y);
+    createEnemy($container, x, y, 2);
   }
 
   // Gets the points HTML element
@@ -316,9 +318,9 @@ function init() {
 // UPDATE FUNCTION
 // This function runs every frame
 function update() {
-  const curretTime = Date.now();
+  const currentTime = Date.now();
   // Calculates the time difference between the last frame and this one
-  const dt = (curretTime - GAME_STATE.lastTime) / 1000;
+  const dt = (currentTime - GAME_STATE.lastTime) / 1000;
 
   // Selects the game container and updates the whole game
   const $container = document.querySelector(".game");
@@ -333,9 +335,16 @@ function update() {
   // Sets the last frame timestamp as the current one before requesting new frame
   const $lives = document.getElementById("game-lives");
   $lives.innerHTML = GAME_STATE.lives;
+  GAME_STATE.lastTime = currentTime;
+  if (GAME_STATE.lives === 0) {
+    gameOver();
+  } else {
+    window.requestAnimationFrame(update);
+  }
+}
 
-  GAME_STATE.lastTime = curretTime;
-  window.requestAnimationFrame(update);
+function gameOver() {
+  return null;
 }
 
 // EVENTS
@@ -421,7 +430,7 @@ window.requestAnimationFrame(update);
 
 
 // ScoreBoard Login //
-const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; //Url of the backend server
+const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; // URL of the backend server
 
 function setScore(score, name) {
   var xhttp = new XMLHttpRequest();
