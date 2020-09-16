@@ -230,7 +230,26 @@ function updateEnemies(dt, $container) {
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
   // Dy allows the enemy to drop himself down to the player.
-  const dy = dt * ENEMY_SPEED;
+  var dy;
+  // Switch case to change the speed of enemies step-by-step the player complete a level.
+  switch (GAME_STATE.level) {
+    case 1: //Level 1
+      dy = dt * ENEMY_SPEED;
+      break;
+    case 2: //Level 2
+      dy = dt * (ENEMY_SPEED * 2);
+      break;
+    case 3: //Level 3
+      dy = dt * (ENEMY_SPEED * 3);
+      break;
+    case 4: //Level 4 //From this leves the game become like terminator.
+      dy = dt * (ENEMY_SPEED * 3.5);
+      break;
+    case 5: //Level 5
+      dy = dt * (ENEMY_SPEED * 4);
+      break;
+  }
+
   // For each enemy
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
@@ -396,48 +415,48 @@ function events() {
   //Buttons
   document
     .getElementById("leftB")
-    .addEventListener("touchstart", function() {
+    .addEventListener("touchstart", function () {
       GAME_STATE.leftPressed = true;
     });
-  document.getElementById("leftB").addEventListener("touchend", function() {
+  document.getElementById("leftB").addEventListener("touchend", function () {
     GAME_STATE.leftPressed = false;
   });
-  document.getElementById("leftB").addEventListener("mousedown", function() {
+  document.getElementById("leftB").addEventListener("mousedown", function () {
     GAME_STATE.leftPressed = true;
   });
-  document.getElementById("leftB").addEventListener("mouseup", function() {
+  document.getElementById("leftB").addEventListener("mouseup", function () {
     GAME_STATE.leftPressed = false;
   });
   document
     .getElementById("rightB")
-    .addEventListener("touchstart", function() {
+    .addEventListener("touchstart", function () {
       GAME_STATE.rightPressed = true;
     });
-  document.getElementById("rightB").addEventListener("touchend", function() {
+  document.getElementById("rightB").addEventListener("touchend", function () {
     GAME_STATE.rightPressed = false;
   });
   document
     .getElementById("rightB")
-    .addEventListener("mousedown", function() {
+    .addEventListener("mousedown", function () {
       GAME_STATE.rightPressed = true;
     });
-  document.getElementById("rightB").addEventListener("mouseup", function() {
+  document.getElementById("rightB").addEventListener("mouseup", function () {
     GAME_STATE.rightPressed = false;
   });
   document
     .getElementById("spaceB")
-    .addEventListener("touchstart", function() {
+    .addEventListener("touchstart", function () {
       GAME_STATE.spacePressed = true;
     });
-  document.getElementById("spaceB").addEventListener("touchend", function() {
+  document.getElementById("spaceB").addEventListener("touchend", function () {
     GAME_STATE.spacePressed = false;
   });
   document
     .getElementById("spaceB")
-    .addEventListener("mousedown", function() {
+    .addEventListener("mousedown", function () {
       GAME_STATE.spacePressed = true;
     });
-  document.getElementById("spaceB").addEventListener("mouseup", function() {
+  document.getElementById("spaceB").addEventListener("mouseup", function () {
     GAME_STATE.spacePressed = false;
   });
   // ------------------- //
@@ -468,7 +487,7 @@ function getScoreBorad() {
     var xmlhttp = new XMLHttpRequest();
     var url = SCOREBOARD_SERVER_IP + `/getScoreBoard.php`;
 
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         var myArr = JSON.parse(this.responseText);
         resolve(myArr.data);
