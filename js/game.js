@@ -18,7 +18,7 @@ const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
 // Level parameters
 var Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
-var S_ENEMIES_LVL_1 = 50; // Speed of enemies on level 1
+var S_ENEMIES_LVL_1 = 15; // Speed of enemies on level 1
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -172,11 +172,11 @@ function updateBullets(dt, $container) {
       if (rectsIntersect(r1, r2)) {
         enemy.lives -= 1;
         // Adds one point
-        GAME_STATE.points += 1;
         destroyBullet($container, bullet);
         if (enemy.lives === 0) {
           // Destroy enemy and bullet
           destroyEnemy($container, enemy);
+          GAME_STATE.points += 1;
         }
         break;
       }
@@ -211,9 +211,9 @@ function createEnemy($container, x, y, lives) {
   $element.src = enemiesImg[Math.floor(Math.random() * 3)];
   $element.className = "enemy";
   $container.appendChild($element);
-  var speed = Math.abs(Math.floor(Math.random() * 40));
+  var speed = Math.abs(10 + Math.floor(Math.random() * 20));
   // Creates a constant with the enemy's position and element
-  const enemy = { x, y, $element, lives };
+  const enemy = { x, y, $element, lives, speed };
   // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
   // Sets the enemy's position
