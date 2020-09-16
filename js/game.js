@@ -17,8 +17,8 @@ const ENEMY_HORIZONTAL_PADDING = 40;
 const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
 // Level parameters
-const Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
-const S_ENEMIES_LVL_1 = 50; // Speed of enemies on level 1
+var Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
+var S_ENEMIES_LVL_1 = 50; // Speed of enemies on level 1
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -314,9 +314,9 @@ function init() {
 // UPDATE FUNCTION
 // This function runs every frame
 function update() {
-  const curretTime = Date.now();
+  const currentTime = Date.now();
   // Calculates the time difference between the last frame and this one
-  const dt = (curretTime - GAME_STATE.lastTime) / 1000;
+  const dt = (currentTime - GAME_STATE.lastTime) / 1000;
 
   // Selects the game container and updates the whole game
   const $container = document.querySelector(".game");
@@ -331,9 +331,16 @@ function update() {
   // Sets the last frame timestamp as the current one before requesting new frame
   const $lives = document.getElementById("game-lives");
   $lives.innerHTML = GAME_STATE.lives;
+  GAME_STATE.lastTime = currentTime;
+  if (GAME_STATE.lives === 0) {
+    gameOver();
+  } else {
+    window.requestAnimationFrame(update);
+  }
+}
 
-  GAME_STATE.lastTime = curretTime;
-  window.requestAnimationFrame(update);
+function gameOver() {
+  return null;
 }
 
 // EVENTS
