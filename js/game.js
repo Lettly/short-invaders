@@ -459,18 +459,22 @@ function setScore(score, name) {
     true
   );
   xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  console.log(SCOREBOARD_SERVER_IP + `/setScore.php?score=${score}&name=${name}`);
+  xhttp.send();
 }
 
-function getScoreBoard() {
-  var xmlhttp = new XMLHttpRequest();
-  var url = SCOREBOARD_SERVER_IP + `/getScoreBoard.php`;
+function getScoreBorad() {
+  return new Promise((resolve, reject) => {
+    var xmlhttp = new XMLHttpRequest();
+    var url = SCOREBOARD_SERVER_IP + `/getScoreBoard.php`;
 
-  xmlhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      var myArr = JSON.parse(this.responseText);
-      console.log(myArr.data);
-    }
-  };
-  xmlhttp.open("GET", url, true);
-  xmlhttp.send();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        resolve(myArr.data);
+      }
+    };
+    xmlhttp.open("GET", url, false);
+    xmlhttp.send();
+  });
 }

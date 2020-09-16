@@ -1,57 +1,115 @@
-@font-face{
-  font-family: '8bit-HUD';
-  src: url('../assets/fonts/8-bit-hud.ttf');
+@font-face {
+    font-family: "8bit-HUD";
+    src: url("../assets/fonts/8-bit-hud.ttf");
 }
 body {
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  font: 16px sans-serif;
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+    font: 16px sans-serif;
 }
 header {
-  text-align: center;
-  background: black;
-  color: #fff;
-  padding: 10px;
+    text-align: center;
+    background: black;
+    color: #fff;
+    padding: 10px;
 }
-.game-wrapper .control-buttons{
-  margin: auto auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 244px;
+.game-wrapper .control-buttons {
+    margin: auto auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 244px;
 }
-.control-buttons div{
-  height: 66px;
-  width: 66px;
+.control-buttons div {
+    height: 66px;
+    width: 66px;
 }
-.game{
-  width: 240px;
-  height: 480px;
-  margin: 10px auto 0 auto;
-  border: 2px black solid;
-  position: relative;
+.game {
+    width: 240px;
+    height: 480px;
+    margin: 10px auto 0 auto;
+    border: 2px black solid;
+    position: relative;
 }
-.game .points{
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  font-family: '8bit-HUD';
-  font-size: 5px;
-  color: #848d9f;
+.game .points {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    font-family: "8bit-HUD";
+    font-size: 5px;
+    color: #848d9f;
 }
 .game .player {
-  position: absolute;
-  margin-left: -30px;
-  width: 60px;
+    position: absolute;
+    margin-left: -30px;
+    width: 60px;
 }
 .game .bullet {
-  position: absolute;
-  margin-left: -10px;
-  height: 20px;
+    position: absolute;
+    margin-left: -10px;
+    height: 20px;
 }
 .game .enemy {
-  position: absolute;
-  margin-left: -15px;
-  width: 30px;
+    position: absolute;
+    margin-left: -15px;
+    width: 30px;
+}
+
+/* Scoreboard */
+.flex-score-list {
+  font-size: small;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 1px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Button */
+.button-gray {
+  background-color: #f2f3f7; 
+  color: #000;
+}
+.button-white {
+  background-color: #ffffff; 
+  color: #000;
+}
+.button-green {
+  background-color: rgb(70, 197, 156); 
+  color: #ffffff;
+}
+.button-red {
+  background-color: rgb(255, 98, 122); 
+  color: #ffffff;
+}
+
+.button-lg-flat {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 3px;
+  border: none;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* Imput */
+input[type=text] {
+  font-family: "8bit-HUD";
+  background-color: rgb(227, 230, 237);
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0;
+  margin-top: 3px;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid #bbbbbb;
+
 }
