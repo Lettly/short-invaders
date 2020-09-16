@@ -1,32 +1,153 @@
 <!DOCTYPE html>
 <html lang="it">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SF Invaders 2.0</title>
+        <link rel="stylesheet" href="./css/main.css" />
+        <link rel="stylesheet" href="./css/modal.css" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="./assets/img/cross/favicon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            href="./assets/img/cross/favicon.png"
+        />
+    </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SF Invaders 2.0</title>
-  <link rel="stylesheet" href="./css/main.css">
-  <link rel="icon" type="image/x-icon" href="./assets/img/cross/favicon.png" />
-  <link rel="icon" type="image/png" href="./assets/img/cross/favicon.png" />
-</head>
-
-<body>
-  <div class="content">
-    <div class="game-wrapper">
-      <div class="game">
-        <div class="points">
-          PUNTEGGIO: <span style="color: #46c59d;" id="game-points"></span><br><br>
-          VITE: <span style="color: #ff627a;" id="game-lives"></span>
+    <body>
+        <div class="content">
+            <div class="game-wrapper">
+                <div class="game">
+                    <div class="points">
+                        PUNTEGGIO:
+                        <span style="color: #46c59d" id="game-points"></span
+                        ><br /><br />
+                        VITE:
+                        <span style="color: #ff627a" id="game-lives"></span>
+                    </div>
+                </div>
+                <div class="control-buttons">
+                    <div
+                        id="leftB"
+                        style="
+                            background-image: url(./assets/img/buttons/arrowL.png);
+                        "
+                    ></div>
+                    <div
+                        id="spaceB"
+                        style="
+                            background-image: url(./assets/img/buttons/teslaLogo.png);
+                        "
+                    ></div>
+                    <div
+                        id="rightB"
+                        style="
+                            background-image: url(./assets/img/buttons/arrowR.png);
+                        "
+                    ></div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="control-buttons">
-        <div id="leftB" style="background-image:url(./assets/img/buttons/arrowL.png);"></div>
-        <div id="spaceB" style="background-image:url(./assets/img/buttons/teslaLogo.png);"></div>
-        <div id="rightB" style="background-image:url(./assets/img/buttons/arrowR.png);"></div>
-      </div>
-    </div>
-  </div>
-  <script src="./js/game.js"></script>
-</body>
 
+        <!-- ALL Modal -->
+        <!-- ScoreBoard Modal (modal-scoreboard)
+
+          showScoreboardModal()
+          hideScoreboardModal()
+        -->
+        <div class="modal-overlay modal-scoreboard">
+            <div class="modal modal-scoreboard">
+                <a class="close-modal" onclick="hideScoreboardModal()">
+                    <svg viewBox="0 0 20 20">
+                        <path
+                            fill="#000000"
+                            d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"
+                        ></path>
+                    </svg>
+                </a>
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h6 style="color: #848d9f">Classifica:</h6>
+                    <div id="scoreboard-list">Caricamento...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Codice Modal (modal-codice)
+
+          hideModal("modal-codice")
+          showModal("modal-codice")
+          toggleModal("modal-codice")
+        -->
+        <div class="modal-overlay modal-codice">
+            <div class="modal modal-codice">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h3 style="color: #46c59c">COMPLIMENTI!</h3>
+                    <h4>MUSK TI HA RISERVATO UN <span style="color: #ff627a">CODICE SCONTO DEL 10%</span> SU UN CORSO A TUA SCELTA!</h4>
+                    <h2 style="color: #ff627a">AF35GH</h2>
+                    <br>
+                    <a href="#" data-clipboard-text="AF35GH" class="button-lg-flat button-gray">Copia codice</a>
+                    <a href="#" target="_blank" class="button-lg-flat button-white">Vai allo shop</a>
+                    <br>
+                    <br>
+                    <a href="" class="button-lg-flat button-green">RIGIOCA</a>
+                    <a href="#" onclick="showScoreboardModal(); hideModal('modal-codice');" class="button-lg-flat button-red">CLASSIFICA</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fallito Modal (modal-fallito)
+
+          hideModal("modal-fallito")
+          showModal("modal-fallito")
+          toggleModal("modal-fallito")
+        -->
+        <div class="modal-overlay modal-fallito">
+          <div class="modal modal-fallito">
+              <div class="modal-content" style="text-align: center">
+                  <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                  <h3 style="color: #ff627a">HAI FALLITO</h3>
+                  <h4>MUSK NON SAREBBE CONTENTO DI FINIRE COSI.. <span style="color: #46c59c">RITENTA!</span></h4>
+                  <br>
+                  <a href="" class="button-lg-flat button-green">RIGIOCA</a>
+                  <a href="#" onclick="showScoreboardModal(); hideModal('modal-fallito');" class="button-lg-flat button-red">CLASSIFICA</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- Grandioso Modal (modal-grandioso)
+
+          hideModal("modal-grandioso")
+          showModal("modal-grandioso")
+          toggleModal("modal-grandioso")
+        -->
+        <div class="modal-overlay modal-grandioso">
+          <div class="modal modal-grandioso">
+              <div class="modal-content" style="text-align: center">
+                  <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                  <h3 style="color: #46c59c">Grandioso!</h3>
+                  <h2 style="display: inline;" id="final-score">Tanti</h2><h2 style="display: inline;">PT</h2>
+                  <h4>RIENTRI NELLA <span style="color: #ff627a">TOP10</span>, SALVA IL TUO RISULTATO!</h4>
+                  <br>
+                  <input type="text" id="player-name" maxlength="10" placeholder="Nome">
+                  <br><br>
+                  <a href="#" onclick="setScore(document.getElementById('final-score').innerHTML, document.getElementById('player-name').value); hideModal('modal-grandioso');" class="button-lg-flat button-green">Salva</a>
+              </div>
+          </div>
+      </div>
+
+        <script>
+            // Impostazioni
+            const MIN_POINT_CIUPON = 10;
+        </script>
+        <script src="./js/game.js"></script>
+        <script src="./js/score.js"></script>
+        <!-- Copy to clipboard (clipboard.js) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    </body>
 </html>
