@@ -10,15 +10,16 @@ const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
 // Bullets (Tesla logo)
 const LASER_MAX_SPEED = 300;
-const LASER_COOLDOWN = 1;
+const LASER_COOLDOWN = 0.5;
 // Enemies
 const ENEMIES_ROW = 5; // Number of enemies per row
 const ENEMY_HORIZONTAL_PADDING = 40;
 const ENEMY_VERTICAL_PADDING = 60;
 const ENEMY_VERTICAL_SIZE = 50;
+var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
 // Level parameters
-var Q_ENEMIES_LVL_1 = 5; // Quantity of enemies on level 1
-var S_ENEMIES_LVL_1 = 15; // Speed of enemies on level 1
+var ENEMIES_QUANTITY = [5, 7, 9, 15, 20, 30]; // Quantity of enemies
+var ENEMY_SPEED = 15; // Speed of enemies
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -33,6 +34,7 @@ const GAME_STATE = {
   enemies: [],
   points: 0,
   lives: 5,
+  level: 0,
 };
 
 // CHECK RECTANGLES INTERSECTION
@@ -212,6 +214,9 @@ function createEnemy($container, x, y, lives) {
   $element.className = "enemy";
   $container.appendChild($element);
   var speed = Math.abs(10 + Math.floor(Math.random() * 20));
+  var sign = Math.round(Math.random());
+  if (sign == 0) { sign = -1 };
+  speed = speed * sign;
   // Creates a constant with the enemy's position and element
   const enemy = { x, y, $element, lives, speed };
   // Pushes the enemy to game state
@@ -225,7 +230,7 @@ function updateEnemies(dt, $container) {
   // Gets all the enemies inside of game state and puts all of them in a constant
   const enemies = GAME_STATE.enemies;
   // Dy allows the enemy to drop himself down to the player.
-  const dy = dt * S_ENEMIES_LVL_1;
+  const dy = dt * ENEMY_SPEED;
   // For each enemy
   for (let i = 0; i < enemies.length; i++) {
     const enemy = enemies[i];
@@ -269,13 +274,33 @@ function init() {
   // Creates the player
   createPlayer($container);
 
+  //initLevel(1);
+
+  // Gets the points HTML element
+  const $points = document.getElementById('game-points');
+  // Displays the news value
+  $points.innerHTML = GAME_STATE.points;
+
+  // Gets the number of lives HTML elements
+  const $lives = document.getElementById('game-lives');
+  // Displays the new value
+  $lives.innerHTML = GAME_STATE.lives;
+}
+
+function initLevel(level) {
+  // Selects the container
+  const $container = document.querySelector('.game');
+
   // Array that stores all the x coordinates to avoid repetition
   var arrX = [];
 
+  enemyNum = ENEMIES_QUANTITY[level - 1];
+  enemyDist = TOLERABLE_ENEMY_DISTANCE[level - 1];
+
   // For the quantity of enemies on level 1
-  for (let i = 0; i < Q_ENEMIES_LVL_1; i++) {
+  for (let i = 0; i < enemyNum; i++) {
     // Distance from the top
-    const y = 25 + Math.floor(Math.random() * 30);
+    var y = 10 + Math.floor(Math.random() * 20);
     // X coordinate
     var x = 0;
     // Validity flag
@@ -287,7 +312,7 @@ function init() {
         var isGood = 0;
         x = 40 + Math.floor(Math.random() * 160);
         for (let j = 0; j < arrX.length; j++) {
-          if (Math.abs(arrX[j] - x) > 25) {
+          if (Math.abs(arrX[j] - x) > enemyDist) {
             isGood++;
           }
         }
@@ -303,16 +328,6 @@ function init() {
     // Create an enemy at the previously set x and y coordinates
     createEnemy($container, x, y, 2);
   }
-
-  // Gets the points HTML element
-  const $points = document.getElementById('game-points');
-  // Displays the news value
-  $points.innerHTML = GAME_STATE.points;
-
-  // Gets the number of lives HTML elements
-  const $lives = document.getElementById('game-lives');
-  // Displays the new value
-  $lives.innerHTML = GAME_STATE.lives;
 }
 
 // UPDATE FUNCTION
@@ -339,6 +354,10 @@ function update() {
   if (GAME_STATE.lives === 0) {
     gameOver();
   } else {
+    if (!GAME_STATE.enemies.length) {
+      GAME_STATE.level += 1;
+      initLevel(GAME_STATE.level);
+    }
     window.requestAnimationFrame(update);
   }
 }
