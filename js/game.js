@@ -170,21 +170,23 @@ function updateBullets(dt, $container) {
       const r2 = enemy.$element.getBoundingClientRect();
       // If enemy rectangle and bullet rectangle intersect
       if (rectsIntersect(r1, r2)) {
-        // Destroy enemy and bullet
-        destroyEnemy($container, enemy);
-        destroyBullet($container, bullet);
+        enemy.lives -= 1;
         // Adds one point
         GAME_STATE.points += 1;
+        destroyBullet($container, bullet);
+        if (enemy.lives === 0) {
+          // Destroy enemy and bullet
+          destroyEnemy($container, enemy);
+        }
         break;
       }
     }
+    // Stores in the game state all the bullets that are still in game.
+    // This means bullets that have not hit anything or that have gone
+    // out of bounds.
+    GAME_STATE.bullets = GAME_STATE.bullets.filter((e) => !e.isDead);
   }
-  // Stores in the game state all the bullets that are still in game.
-  // This means bullets that have not hit anything or that have gone
-  // out of bounds.
-  GAME_STATE.bullets = GAME_STATE.bullets.filter((e) => !e.isDead);
 }
-
 // DESTROY BULLET
 function destroyBullet($container, bullet) {
   // Removes bullet element
@@ -202,7 +204,7 @@ let eCig = "./assets/img/enemies/cig.png"; // CIGARETTE image
 let enemiesImg = [e420, eShort, eCig]; // Array of enemy images
 
 // CREATE ENEMIES
-function createEnemy($container, x, y) {
+function createEnemy($container, x, y, lives) {
   // Creates an image element and assigns a random src image and a predetermined class
   const $element = document.createElement("img");
   // Chooses random image
@@ -210,7 +212,7 @@ function createEnemy($container, x, y) {
   $element.className = "enemy";
   $container.appendChild($element);
   // Creates a constant with the enemy's position and element
-  const enemy = { x, y, $element };
+  const enemy = { x, y, $element, lives };
   // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
   // Sets the enemy's position
@@ -295,7 +297,7 @@ function init() {
     }
     arrX.push(x);
     // Create an enemy at the previously set x and y coordinates
-    createEnemy($container, x, y);
+    createEnemy($container, x, y, 2);
   }
 
   // Gets the points HTML element
@@ -417,7 +419,7 @@ window.requestAnimationFrame(update);
 
 
 // ScoreBoard Login //
-const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; //Url of the backend server
+const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; // URL of the backend server
 
 function setScore(score, name) {
   var xhttp = new XMLHttpRequest();
@@ -429,7 +431,7 @@ function setScore(score, name) {
   xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
 }
 
-function getScoreBorad() {
+function getScoreBoard() {
   var xmlhttp = new XMLHttpRequest();
   var url = SCOREBOARD_SERVER_IP + `/getScoreBoard.php`;
 
