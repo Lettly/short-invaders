@@ -172,11 +172,12 @@ function updateBullets(dt, $container) {
       const r2 = enemy.$element.getBoundingClientRect();
       // If enemy rectangle and bullet rectangle intersect
       if (rectsIntersect(r1, r2)) {
-        // Adds one point
-        destroyBullet($container, bullet);
         // Destroy enemy and bullet
         destroyEnemy($container, enemy);
+        destroyBullet($container, bullet);
+        // Adds one point
         GAME_STATE.points += 1;
+        break;
       }
     }
     // Stores in the game state all the bullets that are still in game.
