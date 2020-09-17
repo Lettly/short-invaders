@@ -88,15 +88,36 @@
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <h3 style="color: #46c59c">COMPLIMENTI!</h3>
-                    <h4>MUSK TI HA RISERVATO UN <span style="color: #ff627a">CODICE SCONTO DEL 10%</span> SU UN CORSO A TUA SCELTA!</h4>
+                    <h4>
+                        MUSK TI HA RISERVATO UN
+                        <span style="color: #ff627a"
+                            >CODICE SCONTO DEL 10%</span
+                        >
+                        SU UN CORSO A TUA SCELTA!
+                    </h4>
                     <h2 style="color: #ff627a">AF35GH</h2>
-                    <br>
-                    <a href="#" data-clipboard-text="AF35GH" class="button-lg-flat button-gray">Copia codice</a>
-                    <a href="#" target="_blank" class="button-lg-flat button-white">Vai allo shop</a>
-                    <br>
-                    <br>
+                    <br />
+                    <a
+                        href="#"
+                        data-clipboard-text="AF35GH"
+                        class="button-lg-flat button-gray"
+                        >Copia codice</a
+                    >
+                    <a
+                        href="#"
+                        target="_blank"
+                        class="button-lg-flat button-white"
+                        >Vai allo shop</a
+                    >
+                    <br />
+                    <br />
                     <a href="" class="button-lg-flat button-green">RIGIOCA</a>
-                    <a href="#" onclick="showScoreboardModal(); hideModal('modal-codice');" class="button-lg-flat button-red">CLASSIFICA</a>
+                    <a
+                        href="#"
+                        onclick="showScoreboardModal(); hideModal('modal-codice');"
+                        class="button-lg-flat button-red"
+                        >CLASSIFICA</a
+                    >
                 </div>
             </div>
         </div>
@@ -108,40 +129,62 @@
           toggleModal("modal-fallito")
         -->
         <div class="modal-overlay modal-fallito">
-          <div class="modal modal-fallito">
-              <div class="modal-content" style="text-align: center">
-                  <img src="assets\img\buttons\teslaLogo.png" alt="" />
-                  <h3 style="color: #ff627a">HAI FALLITO</h3>
-                  <h4>MUSK NON SAREBBE CONTENTO DI FINIRE COSI.. <span style="color: #46c59c">RITENTA!</span></h4>
-                  <br>
-                  <a href="" class="button-lg-flat button-green">RIGIOCA</a>
-                  <a href="#" onclick="showScoreboardModal(); hideModal('modal-fallito');" class="button-lg-flat button-red">CLASSIFICA</a>
-              </div>
-          </div>
-      </div>
+            <div class="modal modal-fallito">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h3 style="color: #ff627a">HAI FALLITO</h3>
+                    <h4>
+                        MUSK NON SAREBBE CONTENTO DI FINIRE COSI..
+                        <span style="color: #46c59c">RITENTA!</span>
+                    </h4>
+                    <br />
+                    <a href="" class="button-lg-flat button-green">RIGIOCA</a>
+                    <a
+                        href="#"
+                        onclick="showScoreboardModal(); hideModal('modal-fallito');"
+                        class="button-lg-flat button-red"
+                        >CLASSIFICA</a
+                    >
+                </div>
+            </div>
+        </div>
 
-      <!-- Grandioso Modal (modal-grandioso)
+        <!-- Grandioso Modal (modal-grandioso)
 
           hideModal("modal-grandioso")
           showModal("modal-grandioso")
           toggleModal("modal-grandioso")
         -->
         <div class="modal-overlay modal-grandioso">
-          <div class="modal modal-grandioso">
-              <div class="modal-content" style="text-align: center">
-                  <img src="assets\img\buttons\teslaLogo.png" alt="" />
-                  <h3 style="color: #46c59c">Grandioso!</h3>
-                  <h2 style="display: inline;" id="final-score">Tanti</h2><h2 style="display: inline;">PT</h2>
-                  <h4>RIENTRI NELLA <span style="color: #ff627a">TOP10</span>, SALVA IL TUO RISULTATO!</h4>
-                  <br>
-                  <input type="text" id="player-name" maxlength="10" placeholder="Nome">
-                  <br><br>
-                  <a href="#" onclick="setScore(document.getElementById('final-score').innerHTML, document.getElementById('player-name').value); hideModal('modal-grandioso');" class="button-lg-flat button-green">Salva</a>
-              </div>
-          </div>
-      </div>
+            <div class="modal modal-grandioso">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h3 style="color: #46c59c">Grandioso!</h3>
+                    <h2 style="display: inline" id="final-score">Tanti</h2>
+                    <h2 style="display: inline">PT</h2>
+                    <h4>
+                        RIENTRI NELLA <span style="color: #ff627a">TOP10</span>,
+                        SALVA IL TUO RISULTATO!
+                    </h4>
+                    <br />
+                    <input
+                        type="text"
+                        id="player-name"
+                        maxlength="10"
+                        placeholder="Nome"
+                    />
+                    <br /><br />
+                    <a
+                        href="#"
+                        onclick="setScore(document.getElementById('final-score').innerHTML, document.getElementById('player-name').value); hideModal('modal-grandioso');"
+                        class="button-lg-flat button-green"
+                        >Salva</a
+                    >
+                </div>
+            </div>
+        </div>
 
-      <!-- Start Modal (modal-start)
+        <!-- Start Modal (modal-start)
 
           hideModal("modal-start")
           showModal("modal-start")
@@ -151,12 +194,32 @@
             <div class="modal modal-start active">
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
-                    <h6><span style="color: #46c59c">ELON MUSK</span> VI HA LANCIATO UNA SFIDA: SALVATEVI COME LUI DAGLI <span style="color: #ff627a">OSTACOLI</span> CHE HA AFFRONTATORITENTA!</span></h6>
+                    <h6>
+                        <span style="color: #46c59c">ELON MUSK</span> VI HA
+                        LANCIATO UNA SFIDA: SALVATEVI COME LUI DAGLI
+                        <span style="color: #ff627a">OSTACOLI</span> CHE HA
+                        AFFRONTATORITENTA!
+                    </h6>
                     <h4 style="color: #848d9f">IN PALIO UN CORSO GRATUITO.</h4>
-                    <br>
-                    <a href="#" onclick="hideModal('modal-start');" class="button-lg-flat button-green">GIOCA</a>
-                    <a href="#" onclick="showScoreboardModal(); hideModal('modal-start');" class="button-lg-flat button-red">CLASSIFICA</a><br><br>
-                    <a href="#" id="shareButton" class="button-lg-flat button-gray">Condividi</a>
+                    <br />
+                    <a
+                        href="#"
+                        onclick="hideModal('modal-start');"
+                        class="button-lg-flat button-green"
+                        >GIOCA</a
+                    >
+                    <a
+                        href="#"
+                        onclick="showScoreboardModal(); hideModal('modal-start');"
+                        class="button-lg-flat button-red"
+                        >CLASSIFICA</a
+                    ><br /><br />
+                    <a
+                        href="#"
+                        id="shareButton"
+                        class="button-lg-flat button-gray"
+                        >Condividi</a
+                    >
                 </div>
             </div>
         </div>
@@ -172,9 +235,41 @@
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <h4 style="color: #848d9f">invaders.com</h4>
-                    <br>
-                    <a href="#" data-clipboard-text="https://linkmoltobellinodacambiare.com" class="button-lg-flat button-green">COPIA LINK</a>
-                    <a href="#" onclick="hideModal('modal-shere');" class="button-lg-flat button-red">CHIUDI</a><br><br>
+                    <br />
+                    <a
+                        href="#"
+                        data-clipboard-text="https://linkmoltobellinodacambiare.com"
+                        class="button-lg-flat button-green"
+                        >COPIA LINK</a
+                    >
+                    <a
+                        href="#"
+                        onclick="hideModal('modal-shere');"
+                        class="button-lg-flat button-red"
+                        >CHIUDI</a
+                    ><br /><br />
+                </div>
+            </div>
+        </div>
+
+        <!-- Landscape Modal (modal-landscape)
+
+          hideModal("modal-landscape")
+          showModal("modal-landscape")
+          toggleModal("modal-landscape")
+        -->
+        <div
+            style="background-color: rgba(255, 255, 255, 1)"
+            class="modal-overlay modal-landscape"
+        >
+            <div style="box-shadow: none" class="modal modal-landscape">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h3>Ruota il dispositivo.</h3>
+                    <br />
+                    <a href="" class="button-lg-flat button-green"
+                        >OK HO GIRATO IL DISPOSITIVO</a
+                    >
                 </div>
             </div>
         </div>
@@ -184,24 +279,47 @@
             const MIN_POINT_CIUPON = 10;
         </script>
         <script>
-            document.getElementById("shareButton").addEventListener('click', event => {
-                if (navigator.share) {
-                    navigator.share({
-                    title: 'WebShare API Demo',
-                    url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
-                    }).then(() => {
-                    console.log('Thanks for sharing!');
-                    })
-                    .catch(console.error);
+            document
+                .getElementById("shareButton")
+                .addEventListener("click", (event) => {
+                    if (navigator.share) {
+                        navigator
+                            .share({
+                                title: "WebShare API Demo",
+                                url: "https://codepen.io/ayoisaiah/pen/YbNazJ",
+                            })
+                            .then(() => {
+                                console.log("Thanks for sharing!");
+                            })
+                            .catch(console.error);
+                    } else {
+                        showModal("modal-shere");
+                    }
+                });
+
+            window.addEventListener("orientationchange", function () {
+                if (window.orientation == 90 || window.orientation == -90) {
+                    // landscape mode
+                    showModal("modal-landscape");
                 } else {
-                    showModal("modal-shere")
+                    // portrait mode
+                    hideModal("modal-landscape");
                 }
             });
+            if (window.orientation == 90 || window.orientation == -90) {
+                // landscape mode
+                showModal("modal-landscape");
+            } else {
+                // portrait mode
+                hideModal("modal-landscape");
+            }
         </script>
         <script src="./js/game.js"></script>
         <script src="./js/score.js"></script>
         <!-- Copy to clipboard (clipboard.js) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
-        <script>new ClipboardJS('a');</script>
+        <script>
+            new ClipboardJS("a");
+        </script>
     </body>
 </html>
