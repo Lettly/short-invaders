@@ -141,13 +141,49 @@
           </div>
       </div>
 
+      <!-- Start Modal (modal-start)
+
+          hideModal("modal-start")
+          showModal("modal-start")
+          toggleModal("modal-start")
+        -->
+        <div class="modal-overlay modal-start active">
+            <div class="modal modal-start active">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h6><span style="color: #46c59c">ELON MUSK</span> VI HA LANCIATO UNA SFIDA: SALVATEVI COME LUI DAGLI <span style="color: #ff627a">OSTACOLI</span> CHE HA AFFRONTATORITENTA!</span></h6>
+                    <h4 style="color: #848d9f">IN PALIO UN CORSO GRATUITO.</h4>
+                    <br>
+                    <a href="#" onclick="hideModal('modal-start');" class="button-lg-flat button-green">GIOCA</a>
+                    <a href="#" onclick="showScoreboardModal(); hideModal('modal-start');" class="button-lg-flat button-red">CLASSIFICA</a><br><br>
+                    <a href="#" id="shareButton" class="button-lg-flat button-gray">Condividi</a>
+                </div>
+            </div>
+        </div>
+
         <script>
             // Impostazioni
             const MIN_POINT_CIUPON = 10;
+        </script>
+        <script>
+            document.getElementById("shareButton").addEventListener('click', event => {
+                if (navigator.share) {
+                    navigator.share({
+                    title: 'WebShare API Demo',
+                    url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+                    }).then(() => {
+                    console.log('Thanks for sharing!');
+                    })
+                    .catch(console.error);
+                } else {
+                    alert("Questa funzione non è disponibile da pc")
+                }
+            });
         </script>
         <script src="./js/game.js"></script>
         <script src="./js/score.js"></script>
         <!-- Copy to clipboard (clipboard.js) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+        <script>new ClipboardJS('a');</script>
     </body>
 </html>
