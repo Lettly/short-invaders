@@ -172,15 +172,11 @@ function updateBullets(dt, $container) {
       const r2 = enemy.$element.getBoundingClientRect();
       // If enemy rectangle and bullet rectangle intersect
       if (rectsIntersect(r1, r2)) {
-        enemy.lives -= 1;
         // Adds one point
         destroyBullet($container, bullet);
-        if (enemy.lives === 0) {
-          // Destroy enemy and bullet
-          destroyEnemy($container, enemy);
-          GAME_STATE.points += 1;
-        }
-        break;
+        // Destroy enemy and bullet
+        destroyEnemy($container, enemy);
+        GAME_STATE.points += 1;
       }
     }
     // Stores in the game state all the bullets that are still in game.
@@ -218,7 +214,7 @@ function createEnemy($container, x, y, lives) {
   if (sign == 0) { sign = -1 };
   speed = speed * sign;
   // Creates a constant with the enemy's position and element
-  const enemy = { x, y, $element, lives, speed };
+  const enemy = { x, y, $element, speed };
   // Pushes the enemy to game state
   GAME_STATE.enemies.push(enemy);
   // Sets the enemy's position
