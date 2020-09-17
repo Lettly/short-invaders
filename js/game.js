@@ -3,8 +3,8 @@ const KEY_CODE_LEFT = 37; // LEFT ARROW KEY (move left)
 const KEY_CODE_RIGHT = 39; // RIGHT ARROW KEY (move right)
 const KEY_CODE_SPACE = 32; // SPACE KEY (shoot)
 // Gamebox dimensions, all dimensions are in pixels
-const GAME_WIDTH = (screen.width > 576) ? 576 : screen.width;
-const GAME_HEIGHT = GAME_WIDTH === 576 ? 640 : (screen.height * 0.90);
+const GAME_WIDTH = document.getElementsByClassName('game-box')[0].clientWidth;
+const GAME_HEIGHT = document.getElementsByClassName('game-box')[0].clientHeight;
 //Player (Tesla)
 const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
@@ -68,7 +68,7 @@ function clamp(v, min, max) {
 // CREATE PLAYER FUNCTION
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / 2;
-  GAME_STATE.playerY = GAME_HEIGHT - 52;
+  GAME_STATE.playerY = GAME_HEIGHT - 40;
   const $player = document.createElement("img");
   $player.src = "./assets/img/objects/car.png";
   $player.className = "player";
@@ -151,7 +151,7 @@ function createBullet($container, x, y) {
   // Sets the bullet position
   setPosition($element, x, y);
   // Loads sound effect
-  const audio = new Audio("./assets/sounds/laser.ogg");
+  const audio = new Audio("./assets/sounds/laser.wav");
   // Plays sound effect
   audio.play();
 }
@@ -299,7 +299,7 @@ function destroyEnemy($container, enemy) {
 // Initializer function, to be called on load
 function init() {
   // Selects the container
-  const $container = document.querySelector('.game');
+  const $container = document.querySelector('.game-box');
   // Creates the player
   createPlayer($container);
 
@@ -318,7 +318,7 @@ function init() {
 
 function initLevel(level) {
   // Selects the container
-  const $container = document.querySelector('.game');
+  const $container = document.querySelector('.game-box');
 
   // Array that stores all the x coordinates to avoid repetition
   var arrX = [];
@@ -367,7 +367,7 @@ function update() {
   const dt = (currentTime - GAME_STATE.lastTime) / 1000;
 
   // Selects the game container and updates the whole game
-  const $container = document.querySelector(".game");
+  const $container = document.querySelector('.game-box');
   updatePlayer(dt, $container);
   updateBullets(dt, $container);
   updateEnemies(dt, $container);
