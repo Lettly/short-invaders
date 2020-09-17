@@ -4,7 +4,7 @@ const KEY_CODE_RIGHT = 39; // RIGHT ARROW KEY (move right)
 const KEY_CODE_SPACE = 32; // SPACE KEY (shoot)
 // Gamebox dimensions, all dimensions are in pixels
 const GAME_WIDTH = (screen.width > 576) ? 576 : screen.width;
-const GAME_HEIGHT = GAME_WIDTH === 576 ? 640 : (screen.height - 78);
+const GAME_HEIGHT = GAME_WIDTH === 576 ? 640 : (screen.height * 0.90);
 //Player (Tesla)
 const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
@@ -68,7 +68,7 @@ function clamp(v, min, max) {
 // CREATE PLAYER FUNCTION
 function createPlayer($container) {
   GAME_STATE.playerX = GAME_WIDTH / 2;
-  GAME_STATE.playerY = GAME_HEIGHT - 40;
+  GAME_STATE.playerY = GAME_HEIGHT - 52;
   const $player = document.createElement("img");
   $player.src = "./assets/img/objects/car.png";
   $player.className = "player";
