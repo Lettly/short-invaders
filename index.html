@@ -161,6 +161,24 @@
             </div>
         </div>
 
+        <!-- Shere Modal (modal-shere)
+
+          hideModal("modal-shere")
+          showModal("modal-shere")
+          toggleModal("modal-shere")
+        -->
+        <div class="modal-overlay modal-shere">
+            <div class="modal modal-shere">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <h4 style="color: #848d9f">invaders.com</h4>
+                    <br>
+                    <a href="#" data-clipboard-text="https://linkmoltobellinodacambiare.com" class="button-lg-flat button-green">COPIA LINK</a>
+                    <a href="#" onclick="hideModal('modal-shere');" class="button-lg-flat button-red">CHIUDI</a><br><br>
+                </div>
+            </div>
+        </div>
+
         <script>
             // Impostazioni
             const MIN_POINT_CIUPON = 10;
@@ -176,7 +194,7 @@
                     })
                     .catch(console.error);
                 } else {
-                    alert("Questa funzione non è disponibile da pc")
+                    showModal("modal-shere")
                 }
             });
         </script>
