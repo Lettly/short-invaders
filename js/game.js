@@ -3,22 +3,18 @@ const KEY_CODE_LEFT = 37; // LEFT ARROW KEY (move left)
 const KEY_CODE_RIGHT = 39; // RIGHT ARROW KEY (move right)
 const KEY_CODE_SPACE = 32; // SPACE KEY (shoot)
 // Gamebox dimensions, all dimensions are in pixels
-const GAME_WIDTH = 240;
-const GAME_HEIGHT = 480;
+const GAME_WIDTH = (screen.width > 576) ? 576 : screen.width;
+const GAME_HEIGHT = GAME_WIDTH === 576 ? 640 : (screen.height - 78);
 //Player (Tesla)
 const PLAYER_WIDTH = 60;
 const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
 // Bullets (Tesla logo)
 const LASER_MAX_SPEED = 300;
-const LASER_COOLDOWN = 0.5;
+var LASER_COOLDOWN;
 // Enemies
-const ENEMIES_ROW = 5; // Number of enemies per row
-const ENEMY_HORIZONTAL_PADDING = 40;
-const ENEMY_VERTICAL_PADDING = 60;
-const ENEMY_VERTICAL_SIZE = 50;
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 15, 20, 30]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 25]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 
 //GAME PROPERTIES
@@ -107,6 +103,23 @@ function updatePlayer(dt, $container) {
     // Create bullet
     createBullet($container, GAME_STATE.playerX, GAME_STATE.playerY);
     // Set the shooting cooldown value to preconfigured number
+    switch (GAME_STATE.level) {
+      case 1:
+        LASER_COOLDOWN = 0.5;
+        break;
+      case 2:
+        LASER_COOLDOWN = 0.4;
+        break;
+      case 3:
+        LASER_COOLDOWN = 0.3;
+        break;
+      case 4:
+        LASER_COOLDOWN = 0.2;
+        break;
+      case 5:
+        LASER_COOLDOWN = 0.1;
+        break;
+    };
     GAME_STATE.playerCooldown = LASER_COOLDOWN;
   }
   // If the shooting cooldown time has not elapsed
@@ -252,7 +265,7 @@ function updateEnemies(dt, $container) {
     const enemy = enemies[i];
     // Change the x position by adding dx
     const dx = dt * enemy.speed;
-    if (enemy.x + dx >= 200 || enemy.x + dx <= 40) {
+    if (enemy.x + dx >= GAME_WIDTH - 40 || enemy.x + dx <= 40) {
       enemy.speed = enemy.speed * -1;
     }
     const x = (enemy.x += dx);
@@ -326,7 +339,7 @@ function initLevel(level) {
       isValid = false;
       while (!isValid) {
         var isGood = 0;
-        x = 40 + Math.floor(Math.random() * 160);
+        x = 40 + Math.floor(Math.random() * (GAME_WIDTH - 80));
         for (let j = 0; j < arrX.length; j++) {
           if (Math.abs(arrX[j] - x) > enemyDist) {
             isGood++;
@@ -338,7 +351,7 @@ function initLevel(level) {
       }
     } else {
       // Set a random x coordinate
-      x = 40 + Math.floor(Math.random() * 160);
+      x = 40 + Math.floor(Math.random() * (GAME_WIDTH - 80));
     }
     arrX.push(x);
     // Create an enemy at the previously set x and y coordinates

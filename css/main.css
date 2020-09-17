@@ -15,21 +15,23 @@ header {
     padding: 10px;
 }
 .game-wrapper .control-buttons {
+   border-top: 1px solid rgb(227 ,230 ,237);
+    width: 100%;
+    position: fixed;
+    bottom: 0;
     margin: auto auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    width: 244px;
+    justify-content: space-evenly;
 }
 .control-buttons div {
     height: 66px;
     width: 66px;
 }
 .game {
-    width: 240px;
-    height: 480px;
+    width: 100%;
+    height: 100%;
     margin: 10px auto 0 auto;
-    border: 2px black solid;
     position: relative;
 }
 .game .points {
@@ -112,4 +114,12 @@ input[type=text] {
   box-sizing: border-box;
   border: 1px solid #bbbbbb;
 
+}
+
+@media screen and (min-width: 576px){
+  .game{
+    width: 576px;
+    height: 640px;
+    border: 2px black solid;
+  }
 }
