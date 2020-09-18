@@ -296,14 +296,17 @@ function updateEnemies(dt, $container) {
             dy = dt * (ENEMY_SPEED * 3.5);
             break;
         case 9: //Level 9
+            dy = dt * (ENEMY_SPEED * 3.75);
+            break;
+        case 10: //Level 10
             dy = dt * (ENEMY_SPEED * 4);
+            break;
+        case 11: //Level 11
+            dy = dt * (ENEMY_SPEED * 4.25);
             break;
         default:
             //Max speed
-            dy = dt * (ENEMY_SPEED * (GAME_STATE.level * 0.5 + 1.5));
-            if ((GAME_STATE.level * 0.5 + 1.5) > 12) {
-                dy = dt * ENEMY_SPEED * 12;
-            }
+            dy = dt * (ENEMY_SPEED * 4.5)
             break;
     }
 
