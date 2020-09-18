@@ -14,7 +14,7 @@ var LASER_COOLDOWN;
 // Enemies
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 25]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 20]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
@@ -140,6 +140,11 @@ function updatePlayer(dt, $container) {
   setPosition($player, GAME_STATE.playerX, GAME_STATE.playerY);
 }
 
+function playAudioLaser() { 
+  document.getElementById("laserAudio").currentTime = 0
+  document.getElementById("laserAudio").play()
+}
+
 // [ BULLET SECTION ]
 
 // CREATE BULLET
@@ -156,9 +161,9 @@ function createBullet($container, x, y) {
   // Sets the bullet position
   setPosition($element, x, y);
   // Loads sound effect
-  const audio = new Audio("./assets/sounds/laser.wav");
+  // const audio = new Audio("./assets/sounds/laser.wav");
   // Plays sound effect
-  audio.play();
+  playAudioLaser()
 }
 
 // UPDATE BULLETS
@@ -210,7 +215,7 @@ function destroyBullet($container, bullet) {
     // Removes bullet element
     $container.removeChild(bullet.$element);
     // Sets the bullet's state to dead
-    bullet.isDead = true;
+    bullet.isDead = true; 
   } 
 }
 
@@ -495,6 +500,7 @@ function events() {
   // ------------------- //
 }
 
+//Start Game
 function startGame() { 
   if (!game_started) {
     events();
