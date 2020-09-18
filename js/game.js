@@ -389,7 +389,7 @@ function initLevel(level) {
     // For the quantity of enemies on level 1
     for (let i = 0; i < enemyNum; i++) {
         // Distance from the top
-        var y = 10 + Math.floor(Math.random() * 20);
+        var y = 10 + Math.floor(Math.random() * 50);
         // X coordinate
         var x = 0;
         // Validity flag
