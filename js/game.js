@@ -14,7 +14,7 @@ var LASER_COOLDOWN;
 // Enemies
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 20]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 20, 15, 10, 8, 10, 15, 20]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
@@ -25,6 +25,7 @@ const GAME_STATE = {
   leftPressed: false,
   rightPressed: false,
   spacePressed: false,
+  lastStateSpacePressed: false,
   playerX: 0,
   playerY: 0,
   playerCooldown: 0,
@@ -101,7 +102,7 @@ function updatePlayer(dt, $container) {
   );
 
   // If the space key is pressed and the shooting cooldown time has elapsed
-  if (GAME_STATE.spacePressed && GAME_STATE.playerCooldown <= 0) {
+  if (GAME_STATE.spacePressed && GAME_STATE.playerCooldown <= 0 && (GAME_STATE.spacePressed != GAME_STATE.lastStateSpacePressed)) {
     // Create bullet
     createBullet($container, GAME_STATE.playerX, GAME_STATE.playerY);
     // Set the shooting cooldown value to preconfigured number
@@ -121,11 +122,21 @@ function updatePlayer(dt, $container) {
       case 5:
         LASER_COOLDOWN = 0.1;
         break;
+      case 6:
+        LASER_COOLDOWN = 0.2;
+        break;
+      case 7:
+        LASER_COOLDOWN = 0.3;
+        break;
       default: //Min
-        LASER_COOLDOWN = 0.1;
+        LASER_COOLDOWN = 0.4;
         break; 
     };
     GAME_STATE.playerCooldown = LASER_COOLDOWN;
+    GAME_STATE.lastStateSpacePressed = GAME_STATE.spacePressed;
+  }
+  if (GAME_STATE.spacePressed === false && GAME_STATE.lastStateSpacePressed === true) {
+    GAME_STATE.lastStateSpacePressed = false;
   }
   // If the shooting cooldown time has not elapsed
   // NOTE: this if statement and the one above are completely independent
@@ -160,8 +171,6 @@ function createBullet($container, x, y) {
   GAME_STATE.bullets.push(bullet);
   // Sets the bullet position
   setPosition($element, x, y);
-  // Loads sound effect
-  // const audio = new Audio("./assets/sounds/laser.wav");
   // Plays sound effect
   playAudioLaser()
 }
@@ -270,8 +279,20 @@ function updateEnemies(dt, $container) {
     case 5: //Level 5
       dy = dt * (ENEMY_SPEED * 4);
       break;
-    default: //Max speed
+    case 6: //Level 5
       dy = dt * (ENEMY_SPEED * 5);
+      break;
+    case 7: //Level 5
+      dy = dt * (ENEMY_SPEED * 5.5);
+      break;
+    case 8: //Level 5
+      dy = dt * (ENEMY_SPEED * 6);
+      break;
+    case 9: //Level 5
+      dy = dt * (ENEMY_SPEED * 6.5);
+      break;
+    default: //Max speed
+      dy = dt * (ENEMY_SPEED * 7);
       break;
 
   }
@@ -407,7 +428,7 @@ function update() {
   const $lives = document.getElementById("game-lives");
   $lives.innerHTML = GAME_STATE.lives;
   GAME_STATE.lastTime = currentTime;
-  if (GAME_STATE.lives === 0) {
+  if (GAME_STATE.lives <= 0) {
     gameOver();
   } else {
     if (!GAME_STATE.enemies.length) {
