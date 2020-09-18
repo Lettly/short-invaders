@@ -16,6 +16,8 @@ var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
 // Level parameters
 var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 25]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
+//Game State
+var game_started = false; //If game is started
 
 //GAME PROPERTIES
 const GAME_STATE = {
@@ -119,6 +121,9 @@ function updatePlayer(dt, $container) {
       case 5:
         LASER_COOLDOWN = 0.1;
         break;
+      default: //Min
+        LASER_COOLDOWN = 0.1;
+        break; 
     };
     GAME_STATE.playerCooldown = LASER_COOLDOWN;
   }
@@ -258,6 +263,10 @@ function updateEnemies(dt, $container) {
     case 5: //Level 5
       dy = dt * (ENEMY_SPEED * 4);
       break;
+    default: //Max speed
+      dy = dt * (ENEMY_SPEED * 5);
+      break;
+
   }
 
   // For each enemy
@@ -324,7 +333,13 @@ function initLevel(level) {
   var arrX = [];
 
   enemyNum = ENEMIES_QUANTITY[level - 1];
+  if (enemyNum === undefined) { //If is out of all level then...
+    enemyNum = ENEMIES_QUANTITY[ENEMIES_QUANTITY.length-1];
+  }
   enemyDist = TOLERABLE_ENEMY_DISTANCE[level - 1];
+  if (enemyDist === undefined) { //If is out of all level then...
+    enemyDist = TOLERABLE_ENEMY_DISTANCE[TOLERABLE_ENEMY_DISTANCE.length-1];
+  }
 
   // For the quantity of enemies on level 1
   for (let i = 0; i < enemyNum; i++) {
@@ -392,6 +407,7 @@ function update() {
 }
 
 function gameOver() {
+  endGame(GAME_STATE.points);
   return null;
 }
 
@@ -472,12 +488,20 @@ function events() {
   // ------------------- //
 }
 
-events();
-init();
-window.requestAnimationFrame(update);
+function startGame() { 
+  if (!game_started) {
+    events();
+    init();
+    window.requestAnimationFrame(update);
+    game_started = true;
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
-// ScoreBoard Login //
+// ScoreBoard Logic //
 const SCOREBOARD_SERVER_IP = "http://15.161.0.103"; // URL of the backend server
 
 function setScore(score, name) {
