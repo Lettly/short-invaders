@@ -22,7 +22,20 @@ body {
   height: 88%;
   margin: auto;
   position: relative;
-  background-image: url('../assets/img/background/bg.png');
+  /* 
+  STATIC BG: 
+  background-image: url('../assets/img/background/bg.png'); 
+  */
+  background: url('../assets/img/background/bg_pattern1.png');
+  animation: scroll-background 12.5s linear infinite;
+}
+@keyframes scroll-background {
+  from{
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: 1824px;
+  }
 }
 .game-info {
   position: absolute;
@@ -31,6 +44,12 @@ body {
   font-family: "8bit-HUD";
   font-size: 5px;
   color: #848d9f;
+}
+#game-points{
+  color: #46c59d;
+}
+#game-lives{
+  color: #ff627a;
 }
 .game-box .player {
   position: absolute;
@@ -139,6 +158,7 @@ input[type=text] {
     border: 2px black solid;
   }
   .game-controls{
+    width: 576px;
     border-top: none;
   }
 }

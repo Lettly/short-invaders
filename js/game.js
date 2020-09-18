@@ -53,6 +53,7 @@ function rectsIntersect(r1, r2) {
 function setPosition($el, x, y) {
     // Sets the position using the CSS translate
     $el.style.transform = `translate(${x}px, ${y}px)`;
+    $el.style.webkitTransform = `translate(${x}px, ${y}px)`;
 }
 
 // CLAMP FUNCTION
