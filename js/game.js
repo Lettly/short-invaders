@@ -281,19 +281,19 @@ function updateEnemies(dt, $container) {
             dy = dt * (ENEMY_SPEED * 2.5);
             break;
         case 5: //Level 5
-            dy = dt * (ENEMY_SPEED * 3);
+            dy = dt * (ENEMY_SPEED * 2.75);
             break;
         case 6: //Level 6
-            dy = dt * (ENEMY_SPEED * 3.5);
+            dy = dt * (ENEMY_SPEED * 3.0);
             break;
         case 7: //Level 7
-            dy = dt * (ENEMY_SPEED * 4);
+            dy = dt * (ENEMY_SPEED * 3.25);
             break;
         case 8: //Level 8
-            dy = dt * (ENEMY_SPEED * 4.5);
+            dy = dt * (ENEMY_SPEED * 3.50);
             break;
         case 9: //Level 9
-            dy = dt * (ENEMY_SPEED * 5);
+            dy = dt * (ENEMY_SPEED * 4);
             break;
         default:
             //Max speed
