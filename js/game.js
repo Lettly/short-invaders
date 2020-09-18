@@ -306,7 +306,7 @@ function updateEnemies(dt, $container) {
             break;
         default:
             //Max speed
-            dy = dt * (ENEMY_SPEED * 4.5)
+            dy = dt * (ENEMY_SPEED * 4.5);
             break;
     }
 
