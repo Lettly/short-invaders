@@ -16,7 +16,7 @@ var LASER_COOLDOWN;
 // Enemies
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 18, 18, 18, 20, 20, 22, 22, 20]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 13, 14, 15, 16, 17, 17, 18]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
