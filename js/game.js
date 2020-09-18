@@ -1,3 +1,4 @@
+const TEST_MODE = false;
 // Keyboard keycodes, they are stored as constants to avoid unnecessary hard coding
 const KEY_CODE_LEFT = 37; // LEFT ARROW KEY (move left)
 const KEY_CODE_RIGHT = 39; // RIGHT ARROW KEY (move right)
@@ -14,7 +15,7 @@ var LASER_COOLDOWN;
 // Enemies
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 18, 18, 18, 20, 20, 22]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 18, 18, 18, 20, 20, 22, 22, 20]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
@@ -32,7 +33,7 @@ const GAME_STATE = {
     bullets: [],
     enemies: [],
     points: 0,
-    lives: 5,
+    lives: 2,
     level: 0,
 };
 
@@ -103,9 +104,10 @@ function updatePlayer(dt, $container) {
 
     // If the space key is pressed and the shooting cooldown time has elapsed
     if (
-        GAME_STATE.spacePressed &&
-        GAME_STATE.playerCooldown <= 0 &&
-        GAME_STATE.spacePressed != GAME_STATE.lastStateSpacePressed
+        TEST_MODE ||
+        (GAME_STATE.spacePressed &&
+            GAME_STATE.playerCooldown <= 0 &&
+            GAME_STATE.spacePressed != GAME_STATE.lastStateSpacePressed)
     ) {
         // Create bullet
         createBullet($container, GAME_STATE.playerX, GAME_STATE.playerY);
@@ -125,9 +127,6 @@ function updatePlayer(dt, $container) {
                 break;
             case 5:
                 LASER_COOLDOWN = 0.1;
-                break;
-            case 6:
-                LASER_COOLDOWN = 0.2;
                 break;
             default:
                 LASER_COOLDOWN = 0.2;
@@ -299,7 +298,10 @@ function updateEnemies(dt, $container) {
             break;
         default:
             //Max speed
-            dy = dt * (ENEMY_SPEED * ((GAME_STATE.level*0.5)+1.5));
+            dy = dt * (ENEMY_SPEED * (GAME_STATE.level * 0.5 + 1.5));
+            if ((GAME_STATE.level * 0.5 + 1.5) > 12) {
+                dy = dt * ENEMY_SPEED * 12;
+            }
             break;
     }
 
@@ -360,6 +362,9 @@ function init() {
 }
 
 function initLevel(level) {
+    //Add One Lives
+    GAME_STATE.lives += 1;
+
     // Selects the container
     const $container = document.querySelector(".game-box");
 
