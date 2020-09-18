@@ -206,10 +206,12 @@ function updateBullets(dt, $container) {
 }
 // DESTROY BULLET
 function destroyBullet($container, bullet) {
-  // Removes bullet element
-  $container.removeChild(bullet.$element);
-  // Sets the bullet's state to dead
-  bullet.isDead = true;
+  if ($container.contains(bullet.$element)) {
+    // Removes bullet element
+    $container.removeChild(bullet.$element);
+    // Sets the bullet's state to dead
+    bullet.isDead = true;
+  } 
 }
 
 // [ ENEMY SECTION ]
