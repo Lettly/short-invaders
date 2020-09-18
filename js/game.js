@@ -114,20 +114,17 @@ function updatePlayer(dt, $container) {
         createBullet($container, GAME_STATE.playerX, GAME_STATE.playerY);
         // Set the shooting cooldown value to preconfigured number
         switch (GAME_STATE.level) {
-            case 1:
+            case 1: //Level 1
                 LASER_COOLDOWN = 0.5;
                 break;
-            case 2:
+            case 2: //Level 2
                 LASER_COOLDOWN = 0.4;
                 break;
-            case 3:
+            case 3: //Level 3
                 LASER_COOLDOWN = 0.3;
                 break;
-            case 4:
+            case 4: //Level 4+
                 LASER_COOLDOWN = 0.2;
-                break;
-            case 5:
-                LASER_COOLDOWN = 0.1;
                 break;
             default:
                 LASER_COOLDOWN = 0.2;
@@ -285,16 +282,16 @@ function updateEnemies(dt, $container) {
         case 5: //Level 5
             dy = dt * (ENEMY_SPEED * 4);
             break;
-        case 6: //Level 5
+        case 6: //Level 6
             dy = dt * (ENEMY_SPEED * 5);
             break;
-        case 7: //Level 5
+        case 7: //Level 7
             dy = dt * (ENEMY_SPEED * 5.5);
             break;
-        case 8: //Level 5
+        case 8: //Level 8
             dy = dt * (ENEMY_SPEED * 6);
             break;
-        case 9: //Level 5
+        case 9: //Level 9
             dy = dt * (ENEMY_SPEED * 6.5);
             break;
         default:
