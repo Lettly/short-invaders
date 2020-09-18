@@ -328,13 +328,12 @@ function init() {
 function initLevel(level) {
   // Selects the container
   const $container = document.querySelector('.game-box');
-  
+
   //Reset all bullets
   GAME_STATE.bullets.forEach(element => {
     destroyBullet($container, element);
   });
-  GAME_STATE.bullets = [];
-
+  
   // Array that stores all the x coordinates to avoid repetition
   var arrX = [];
 
