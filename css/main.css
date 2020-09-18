@@ -57,7 +57,8 @@ body {
 }
 .game-controls div {
   height: 66px;
-  width: 66px;
+  width: 30vw;
+  background: center no-repeat;
 }
 
 /* Scoreboard */
