@@ -34,7 +34,7 @@ const GAME_STATE = {
     bullets: [],
     enemies: [],
     points: 0,
-    lives: 100,
+    lives: 2,
     level: 0,
 };
 
@@ -73,7 +73,7 @@ function clamp(v, min, max) {
 // CREATE PLAYER FUNCTION
 function createPlayer($container) {
     GAME_STATE.playerX = GAME_WIDTH / 2;
-    GAME_STATE.playerY = GAME_HEIGHT-60;
+    GAME_STATE.playerY = GAME_HEIGHT - 60; // 60 is the height of car img.
     const $player = document.createElement("img");
     $player.src = "./assets/img/objects/car.png";
     $player.className = "player";

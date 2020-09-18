@@ -43,8 +43,8 @@ body {
 }
 .game-box .enemy {
   position: absolute;
-  margin-left: -15px;
-  width: 30px;
+  margin-left: -20px;
+  width: 40px;
 }
 .game-controls {
   border-top: 1px solid rgb(227 ,230 ,237);
