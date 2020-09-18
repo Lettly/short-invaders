@@ -124,11 +124,14 @@ function updatePlayer(dt, $container) {
             case 3: //Level 3
                 LASER_COOLDOWN = 0.3;
                 break;
-            case 4: //Level 4+
+            case 4: //Level 4
                 LASER_COOLDOWN = 0.2;
                 break;
-            default:
-                LASER_COOLDOWN = 0.2;
+            case 5: //Level 5
+                LASER_COOLDOWN = 0.1;
+                break;
+            default: //Level 6+
+                LASER_COOLDOWN = 0.1;
                 break;
         }
         GAME_STATE.playerCooldown = LASER_COOLDOWN;
