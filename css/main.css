@@ -22,6 +22,7 @@ body {
   height: 88%;
   margin: auto;
   position: relative;
+  background-image: url('../assets/img/background/bg.png');
 }
 .game-info {
   position: absolute;
@@ -59,6 +60,15 @@ body {
   height: 66px;
   width: 30vw;
   background: center no-repeat;
+}
+#leftB{
+  background-image: url('../assets/img/buttons/arrowL.png');
+}
+#spaceB{
+  background-image: url('../assets/img/buttons/teslaLogo.png');
+}
+#rightB{
+  background-image: url('../assets/img/buttons/arrowR.png');
 }
 
 /* Scoreboard */
