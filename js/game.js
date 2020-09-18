@@ -17,7 +17,7 @@ var LASER_COOLDOWN;
 var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3];
 // Level parameters
 var ENEMIES_QUANTITY = [5, 7, 9, 12, 13, 14, 15, 16, 17, 17, 18]; // Quantity of enemies
-var ENEMY_SPEED = 15; // Speed of enemies
+var ENEMY_SPEED = 30; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
 
@@ -34,7 +34,7 @@ const GAME_STATE = {
     bullets: [],
     enemies: [],
     points: 0,
-    lives: 2,
+    lives: 100,
     level: 0,
 };
 
@@ -73,7 +73,7 @@ function clamp(v, min, max) {
 // CREATE PLAYER FUNCTION
 function createPlayer($container) {
     GAME_STATE.playerX = GAME_WIDTH / 2;
-    GAME_STATE.playerY = GAME_HEIGHT - 40;
+    GAME_STATE.playerY = GAME_HEIGHT-60;
     const $player = document.createElement("img");
     $player.src = "./assets/img/objects/car.png";
     $player.className = "player";
@@ -271,28 +271,28 @@ function updateEnemies(dt, $container) {
             dy = dt * ENEMY_SPEED;
             break;
         case 2: //Level 2
-            dy = dt * (ENEMY_SPEED * 2);
+            dy = dt * (ENEMY_SPEED * 1.5);
             break;
         case 3: //Level 3
-            dy = dt * (ENEMY_SPEED * 3);
+            dy = dt * (ENEMY_SPEED * 2);
             break;
         case 4: //Level 4 //From this leves the game become like terminator.
-            dy = dt * (ENEMY_SPEED * 3.5);
+            dy = dt * (ENEMY_SPEED * 2.5);
             break;
         case 5: //Level 5
-            dy = dt * (ENEMY_SPEED * 4);
+            dy = dt * (ENEMY_SPEED * 3);
             break;
         case 6: //Level 6
-            dy = dt * (ENEMY_SPEED * 5);
+            dy = dt * (ENEMY_SPEED * 3.5);
             break;
         case 7: //Level 7
-            dy = dt * (ENEMY_SPEED * 5.5);
+            dy = dt * (ENEMY_SPEED * 4);
             break;
         case 8: //Level 8
-            dy = dt * (ENEMY_SPEED * 6);
+            dy = dt * (ENEMY_SPEED * 4.5);
             break;
         case 9: //Level 9
-            dy = dt * (ENEMY_SPEED * 6.5);
+            dy = dt * (ENEMY_SPEED * 5);
             break;
         default:
             //Max speed
