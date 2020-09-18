@@ -1,3 +1,4 @@
+//God Mode for testing
 const TEST_MODE = false;
 // Keyboard keycodes, they are stored as constants to avoid unnecessary hard coding
 const KEY_CODE_LEFT = 37; // LEFT ARROW KEY (move left)
