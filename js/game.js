@@ -12,9 +12,9 @@ const PLAYER_MAX_SPEED = 200; // Speed is defined in pixels per second
 const LASER_MAX_SPEED = 300;
 var LASER_COOLDOWN;
 // Enemies
-var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3, 1];
+var TOLERABLE_ENEMY_DISTANCE = [20, 15, 10, 5, 3];
 // Level parameters
-var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 20, 15, 10, 8, 10, 15, 20]; // Quantity of enemies
+var ENEMIES_QUANTITY = [5, 7, 9, 12, 15, 18, 18, 18, 20, 20, 22]; // Quantity of enemies
 var ENEMY_SPEED = 15; // Speed of enemies
 //Game State
 var game_started = false; //If game is started
@@ -129,12 +129,8 @@ function updatePlayer(dt, $container) {
             case 6:
                 LASER_COOLDOWN = 0.2;
                 break;
-            case 7:
-                LASER_COOLDOWN = 0.3;
-                break;
             default:
-                //Min
-                LASER_COOLDOWN = 0.4;
+                LASER_COOLDOWN = 0.2;
                 break;
         }
         GAME_STATE.playerCooldown = LASER_COOLDOWN;
@@ -303,7 +299,7 @@ function updateEnemies(dt, $container) {
             break;
         default:
             //Max speed
-            dy = dt * (ENEMY_SPEED * 7);
+            dy = dt * (ENEMY_SPEED * ((GAME_STATE.level*0.5)+1.5));
             break;
     }
 
