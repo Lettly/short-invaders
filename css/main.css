@@ -163,6 +163,39 @@ input[type=text] {
   }
 }
 
-/* Or apply it via media query */
+/* Text Color */
+.text-greee {
+  color: #46c59c;
+}
+
+.text-red {
+  color: #ff627a
+}
+
+.text-gary {
+  color: #848d9f;
+}
+
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
+}
+
+/* Text Size */
+h1 {
+  font-size: normal;
+}
+h2 {
+  font-size: normal;
+}
+h3 {
+  font-size: normal;
+}
+h4 {
+  font-size: normal;
+}
+h5 {
+  font-size: normal;
+}
+h6 {
+  font-size: normal;
 }

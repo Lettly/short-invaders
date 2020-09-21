@@ -2,16 +2,16 @@
 <html lang="it">
     <head>
         <!-- Begin Inspectlet Asynchronous Code -->
-<script type="text/javascript">
-(function() {
-window.__insp = window.__insp || [];
-__insp.push(['wid', 1477059121]);
-var ldinsp = function(){
-if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1477059121&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
-setTimeout(ldinsp, 0);
-})();
-</script>
-<!-- End Inspectlet Asynchronous Code -->
+        <script type="text/javascript">
+        (function() {
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 1477059121]);
+        var ldinsp = function(){
+        if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=1477059121&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+        setTimeout(ldinsp, 0);
+        })();
+        </script>
+        <!-- End Inspectlet Asynchronous Code -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>SF Invaders 2.0</title>
@@ -126,7 +126,7 @@ setTimeout(ldinsp, 0);
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <h3 style="color: #ff627a">HAI FALLITO</h3>
                     <h4>
-                        MUSK NON SAREBBE CONTENTO DI FINIRE COSI..
+                        Hai totalizzato un punteggio troppo basso. Puoi fare di meglio... 
                         <span style="color: #46c59c">RITENTA!</span>
                     </h4>
                     <br />
@@ -150,11 +150,11 @@ setTimeout(ldinsp, 0);
             <div class="modal modal-grandioso">
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
-                    <h3 style="color: #46c59c">Grandioso!</h3>
+                    <h3 style="color: #46c59c">Fantastico!</h3>
                     <h2 style="display: inline" id="final-score">Tanti</h2>
                     <h2 style="display: inline">PT</h2>
                     <h4>
-                        RIENTRI NELLA <span style="color: #ff627a">TOP10</span>,
+                        Sei rientrato nella <span style="color: #ff627a">TOP 10</span>:
                         SALVA IL TUO RISULTATO!
                     </h4>
                     <br />
@@ -185,16 +185,14 @@ setTimeout(ldinsp, 0);
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <h6>
-                        <span style="color: #46c59c">ELON MUSK</span> VI HA
-                        LANCIATO UNA SFIDA: SALVATEVI COME LUI DAGLI
-                        <span style="color: #ff627a">OSTACOLI</span> CHE HA
-                        AFFRONTATORITENTA!
+                        Elon Musk è sotto attacco!<br>
+                        Aiutalo a sconfiggere i nemici che minacciano il suo impero.
                     </h6>
-                    <h4 style="color: #848d9f">IN PALIO UN CORSO GRATUITO.</h4>
+                    <h4 style="color: #848d9f">In palio un codice sconto per i corsi di formazione Starting Finance.</h4>
                     <br />
                     <a
                         href="#"
-                        onclick="hideModal('modal-start'); startGame();"
+                        onclick="hideModal('modal-start'); showModal('modal-tutorial'); "
                         class="button-lg-flat button-green"
                         >GIOCA</a
                     >
@@ -237,6 +235,26 @@ setTimeout(ldinsp, 0);
                         class="button-lg-flat button-red"
                         >CHIUDI</a
                     ><br /><br />
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial Modal (modal-tutorial)
+          hideModal("modal-tutorial")
+          showModal("modal-tutorial")
+          toggleModal("modal-tutorial")
+        -->
+        <div
+            class="modal-overlay modal-tutorial"
+        >
+            <div style="box-shadow: none" class="modal modal-transparent modal-tutorial">
+                <div class="modal-content" style="text-align: center">
+                    <img src="assets\img\buttons\teslaLogo.png" alt="" />
+                    <img src="http://i.stack.imgur.com/SBv4T.gif" alt="this slowpoke moves"  width=100%/>
+                    <br /><br>
+                    <a href="#" class="button-lg-flat button-green" onclick="hideModal('modal-tutorial'); startGame();"
+                        >Gioca</a
+                    >
                 </div>
             </div>
         </div>
