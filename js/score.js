@@ -58,7 +58,6 @@ var max_score;
 
             function toggleModal(modal_name) {
                 var element = document.getElementsByClassName(modal_name);
-                console.log(element);
                 Array.from(element).forEach((el) => {
                     el.classList.toggle("active");
                 });
@@ -66,7 +65,6 @@ var max_score;
 
             function hideModal(modal_name) {
                 var element = document.getElementsByClassName(modal_name);
-                console.log(element);
                 Array.from(element).forEach((el) => {
                     el.classList.remove("active");
                 });
@@ -74,7 +72,6 @@ var max_score;
 
             function showModal(modal_name) {
                 var element = document.getElementsByClassName(modal_name);
-                console.log(element);
                 Array.from(element).forEach((el) => {
                     el.classList.add("active");
                 });
