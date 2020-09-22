@@ -2,8 +2,8 @@ document.getElementById("shareButton").addEventListener("click", (event) => {
     if (navigator.share) {
         navigator
             .share({
-                title: "WebShare API Demo",
-                url: "https://codepen.io/ayoisaiah/pen/YbNazJ",
+                title: "Short Invaders GAME",
+                url: "https://shortinvaders.com",
             })
             .then(() => {
                 console.log("Thanks for sharing!");
