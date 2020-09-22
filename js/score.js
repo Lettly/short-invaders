@@ -1,84 +1,97 @@
 var max_score;
-            setMaxScore();
-            
-            function endGame(point) { 
-              if (point > MIN_POINT_CIUPON) {
-                showModal("modal-codice")
-              } else {
-                showModal("modal-fallito")
-              }
+setMaxScore();
 
-              if (point > max_score) {
-                showGrandiosoModal(point)
-              }
-            }
+function endGame(point) {
+    if (point > MIN_POINT_CIUPON) {
+        showCodiceModal("10%", "codice");
+    } else {
+        showModal("modal-fallito");
+    }
 
-            function setMaxScore(data) {
-              //Se non viene passata la classifica la richiede
-              if (data === undefined) {
-                getScoreBorad().then((data) => {
-                  max_score = data[data.length - 1].score;
-                })
-              } else { //Altrimenti usa quella che gli viene passata
-                max_score = data[data.length - 1].score;
-              }
-            }
+    if (point > max_score) {
+        showGrandiosoModal(point);
+    }
+}
 
-            function showGrandiosoModal(point) { 
-              document.getElementById("final-score").innerHTML = point;
-              showModal("modal-grandioso")
-            }
+function setMaxScore(data) {
+    //Se non viene passata la classifica la richiede
+    if (data === undefined) {
+        getScoreBorad().then((data) => {
+            max_score = data[data.length - 1].score;
+        });
+    } else {
+        //Altrimenti usa quella che gli viene passata
+        max_score = data[data.length - 1].score;
+    }
+}
 
-            function hideGrandiosoModal(point) { 
-              hideModal("modal-grandioso")
-            }
+function showGrandiosoModal(point) {
+    document.getElementById("final-score").innerHTML = point;
+    showModal("modal-grandioso");
+}
 
-            function showScoreboardModal() {
-                getScoreBorad().then((data) => {
-                  document.getElementById("scoreboard-list").innerHTML = generateHtmlList(data);
-                  setMaxScore(data);
-                })
+function hideGrandiosoModal(point) {
+    hideModal("modal-grandioso");
+}
 
-                function generateHtmlList(scoreboard) {
-                    output = ``;
-                    scoreboard.forEach((el) => {
-                        output += `<ul class="flex-score-list"><li>${sanitizeHTML(
-                            el.name
-                        )}</li><li>${sanitizeHTML(el.score)}</li></ul>`;
-                    });
-                    return output;
-                }
+function showScoreboardModal() {
+    getScoreBorad().then((data) => {
+        document.getElementById("scoreboard-list").innerHTML = generateHtmlList(
+            data
+        );
+        setMaxScore(data);
+    });
 
-                showModal("modal-scoreboard");
-            }
+    function generateHtmlList(scoreboard) {
+        output = ``;
+        scoreboard.forEach((el) => {
+            output += `<ul class="flex-score-list"><li>${sanitizeHTML(
+                el.name
+            )}</li><li>${sanitizeHTML(el.score)}</li></ul>`;
+        });
+        return output;
+    }
 
-            function hideScoreboardModal() {
-                hideModal("modal-scoreboard");
-            }
+    showModal("modal-scoreboard");
+}
 
-            function toggleModal(modal_name) {
-                var element = document.getElementsByClassName(modal_name);
-                Array.from(element).forEach((el) => {
-                    el.classList.toggle("active");
-                });
-            }
+function hideScoreboardModal() {
+    hideModal("modal-scoreboard");
+}
 
-            function hideModal(modal_name) {
-                var element = document.getElementsByClassName(modal_name);
-                Array.from(element).forEach((el) => {
-                    el.classList.remove("active");
-                });
-            }
+function showCodiceModal(percentuale, codice) {
+    document.getElementById("codice-sconto").innerHTML = codice;
+    document.getElementById("percentuale-sconto").innerHTML = percentuale;
+    showModal("modal-codice");
+}
 
-            function showModal(modal_name) {
-                var element = document.getElementsByClassName(modal_name);
-                Array.from(element).forEach((el) => {
-                    el.classList.add("active");
-                });
-            }
+function hideCodiceModal() {
+    hideModal("modal-codice");
+}
 
-            function sanitizeHTML(text) {
-                var element = document.createElement("div");
-                element.innerText = text;
-                return element.innerHTML;
-            }
+function toggleModal(modal_name) {
+    var element = document.getElementsByClassName(modal_name);
+    Array.from(element).forEach((el) => {
+        el.classList.toggle("active");
+    });
+}
+
+function hideModal(modal_name) {
+    var element = document.getElementsByClassName(modal_name);
+    Array.from(element).forEach((el) => {
+        el.classList.remove("active");
+    });
+}
+
+function showModal(modal_name) {
+    var element = document.getElementsByClassName(modal_name);
+    Array.from(element).forEach((el) => {
+        el.classList.add("active");
+    });
+}
+
+function sanitizeHTML(text) {
+    var element = document.createElement("div");
+    element.innerText = text;
+    return element.innerHTML;
+}
