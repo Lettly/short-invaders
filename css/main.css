@@ -24,9 +24,9 @@ body {
   position: relative;
   /* 
   STATIC BG: 
-  background-image: url('../assets/img/background/bg.png'); 
+  background-image: url('../assets/img/background/bg.jpg'); 
   */
-  background: url('../assets/img/background/bg_patternSF.png');
+  background: url('../assets/img/background/bg_patternSF.jpg');
   animation: scroll-background 12.5s linear infinite;
 }
 @keyframes scroll-background {
