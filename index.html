@@ -139,7 +139,9 @@
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <h3 style="color: #ff627a">HAI FALLITO</h3>
-                    <h2 style="display: inline" id="final-score-fallito">Pochi</h2>
+                    <h2 style="display: inline" id="final-score-fallito">
+                        Pochi
+                    </h2>
                     <h2 style="display: inline">PT</h2>
                     <h4>
                         Hai totalizzato un punteggio troppo basso. Puoi fare di
@@ -273,8 +275,13 @@
             >
                 <div class="modal-content" style="text-align: center">
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
-                    <img src="assets/img/landing/tutorial-min.gif" alt="Game
-                    Tutorial" width=100%/ style="margin: 10px 0;">
+                    <video width="100%" loop autoplay>
+                        <source src="assets/img/landing/tutorial-min.mp4" type="video/mp4">
+                        <h5>Sparaaaaaaaaa!</h5>
+                      </video>                      
+                    <!-- <img src="assets/img/landing/tutorial-min.gif" alt="Game
+                    Tutorial" width=100%/ style="margin: 10px 0;"> -->
+                    <br><br>
                     <a
                         href="#"
                         class="button-lg-flat button-green"
@@ -307,7 +314,7 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.min.js"></script>
         <script type="module">
-            import Cookies from 'js-cookie'
+            import Cookies from "js-cookie";
         </script>
         <script src="./js/game.js"></script>
         <script src="./js/score.js"></script>
@@ -323,5 +330,19 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bowser@2.10.0/es5.min.js"></script>
         <script src="./js/browser.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=UA-88335213-2"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "UA-88335213-2");
+        </script>
     </body>
 </html>
