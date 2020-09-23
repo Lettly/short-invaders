@@ -11,7 +11,7 @@ function endGame(point) {
     } else if (point > 400){
         showCodiceModal("20€", "codice");
     } else {
-        showModal("modal-fallito");
+        showFallitoModal(point);
     }
 
     if (point > max_score) {
@@ -34,6 +34,15 @@ function setMaxScore(data) {
 function showGrandiosoModal(point) {
     document.getElementById("final-score").innerHTML = point;
     showModal("modal-grandioso");
+}
+
+function showFallitoModal(point) {
+    document.getElementById("final-score-fallito").innerHTML = point;
+    showModal("modal-fallito");
+}
+
+function hideFallitModal(point) {
+    hideModal("modal-fallito");
 }
 
 function hideGrandiosoModal(point) {
