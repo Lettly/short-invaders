@@ -199,3 +199,18 @@ h5 {
 h6 {
   font-size: normal;
 }
+
+.textsize-l {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.textsize-m {
+  font-size: 0.75em;
+  margin-bottom: 10px;
+}
+
+.textsize-s {
+  font-size: 0.65em;
+  margin-bottom: 10px;
+}

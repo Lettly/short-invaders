@@ -5,6 +5,8 @@ switch(currentBrowser){
         break;
     case 'Microsoft Edge':
         break;
+    case 'Safari':
+        break;
     default:
         alert('Il gioco potrebbe non funzionare correttamente su questo Browser.');
         break;
