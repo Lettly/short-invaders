@@ -325,7 +325,9 @@ function updateEnemies(dt, $container) {
             // Destroy enemy
             destroyEnemy($container, enemy);
             // Remove one life
-            GAME_STATE.lives -= 1;
+            if (GAME_STATE.lives > 0) {
+                GAME_STATE.lives -= 1;
+            }
         }
         // Sets new position
         setPosition(enemy.$element, x, y);
