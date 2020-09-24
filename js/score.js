@@ -3,13 +3,13 @@ setMaxScore();
 
 function endGame(point) {
     if (point > 100 && point <= 150){
-        showCodiceModal("5€", "HEXJC");
+        showCodiceModal("5€", "HEXJC", point);
     } else if (point > 150 && point <= 200){
-        showCodiceModal("10€", "PHGYS");
+        showCodiceModal("10€", "PHGYS", point);
     } else if (point > 200 && point <= 400){
-        showCodiceModal("15€", "NAHVZ");
+        showCodiceModal("15€", "NAHVZ", point);
     } else if (point > 400){
-        showCodiceModal("20€", "WKBKN");
+        showCodiceModal("20€", "WKBKN", point);
     } else {
         showFallitoModal(point);
     }
@@ -74,7 +74,8 @@ function hideScoreboardModal() {
     hideModal("modal-scoreboard");
 }
 
-function showCodiceModal(percentuale, codice) {
+function showCodiceModal(percentuale, codice, point) {
+    document.getElementById("final-score-codice").innerHTML = point;
     document.getElementById("codice-sconto").innerHTML = codice;
     document.getElementById("percentuale-sconto").innerHTML = percentuale;
     showModal("modal-codice");
