@@ -293,6 +293,14 @@
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bowser@2.10.0/es5.min.js"></script>
         <script src="./js/browser.js"></script>
+        <!-- Disable zoom -->
+        <script>
+            window.document.addEventListener('touchmove', e => {
+              if(e.scale !== 1) {
+                e.preventDefault();
+              }
+            }, {passive: false});
+        </script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script
             async
@@ -307,5 +315,6 @@
 
             gtag("config", "UA-88335213-2");
         </script>
+
     </body>
 </html>
