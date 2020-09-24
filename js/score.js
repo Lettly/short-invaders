@@ -3,13 +3,13 @@ setMaxScore();
 
 function endGame(point) {
     if (point > 100 && point <= 150){
-        showCodiceModal("5€", "HEXJC", point);
+        showCodiceModal("5 EURO", "HEXJC", point);
     } else if (point > 150 && point <= 200){
-        showCodiceModal("10€", "PHGYS", point);
+        showCodiceModal("10 EURO", "PHGYS", point);
     } else if (point > 200 && point <= 400){
-        showCodiceModal("15€", "NAHVZ", point);
+        showCodiceModal("15 EURO", "NAHVZ", point);
     } else if (point > 400){
-        showCodiceModal("20€", "WKBKN", point);
+        showCodiceModal("20 EURO", "WKBKN", point);
     } else {
         showFallitoModal(point);
     }

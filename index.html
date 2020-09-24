@@ -47,7 +47,7 @@
         -->
         <div class="modal-overlay modal-scoreboard">
             <div class="modal modal-scoreboard">
-                <a href="" class="close-modal">
+                <a href="" onclick="ga('send', 'event', 'Rigioca', 'click');" class="close-modal">
                     <svg viewBox="0 0 20 20">
                         <path
                             fill="#000000"
@@ -90,12 +90,12 @@
                     <a
                         href="https://starting-finance-shop.myshopify.com/collections/corsi-di-formazione-2"
                         target="_blank"
-                        class="button-lg-flat button-white"
+                        class="button-lg-flat button-white" onclick="ga('send', 'event', 'Link Corso', 'click');"
                         >Vai allo shop</a
                     >
                     <br />
                     <br />
-                    <a href="" class="button-lg-flat button-red">RIGIOCA</a>
+                    <a href="" onclick="ga('send', 'event', 'Rigioca', 'click');" class="button-lg-flat button-red">RIGIOCA</a>
                 </div>
             </div>
         </div>
@@ -119,10 +119,10 @@
                         <span style="color: #46c59c">RITENTA!</span>
                     </div>
                     <br />
-                    <a href="" class="button-lg-flat button-green">RIGIOCA</a>
+                    <a href="" onclick="ga('send', 'event', 'Rigioca', 'click');" class="button-lg-flat button-green">RIGIOCA</a>
                     <a
                         href="#classifica"
-                        onclick="showScoreboardModal(); hideModal('modal-fallito');"
+                        onclick="showScoreboardModal(); hideModal('modal-fallito'); ga('send', 'event', 'Classifica', 'click');"
                         class="button-lg-flat button-red"
                         >CLASSIFICA</a
                     >
@@ -157,7 +157,7 @@
                     <br /><br />
                     <a
                         href="#classifica"
-                        onclick="setScore(document.getElementById('final-score').innerHTML, document.getElementById('player-name').value); hideModal('modal-grandioso');"
+                        onclick="setScore(document.getElementById('final-score').innerHTML, document.getElementById('player-name').value); hideModal('modal-grandioso'); ga('send', 'event', 'Classifica', 'click');"
                         class="button-lg-flat button-green"
                         >Salva</a
                     >
@@ -186,18 +186,18 @@
                     <br />
                     <a
                         href="#tutorial"
-                        onclick="hideModal('modal-start'); showModal('modal-tutorial'); "
+                        onclick="hideModal('modal-start'); showModal('modal-tutorial'); ga('send', 'event', 'Tutorial', 'click')"
                         class="button-lg-flat button-green"
                         >GIOCA</a
                     >
                     <a
                         href="#classifica"
-                        onclick="showScoreboardModal(); hideModal('modal-start');"
+                        onclick="showScoreboardModal(); hideModal('modal-start'); ga('send', 'event', 'Classifica', 'click');"
                         class="button-lg-flat button-red"
                         >CLASSIFICA</a
                     ><br /><br />
                     <a
-                        href="#condividi"
+                        href="#condividi" onclick="ga('send', 'event', 'Condividi', 'click');"
                         id="shareButton"
                         class="button-lg-flat button-gray"
                         >Condividi</a
@@ -218,13 +218,13 @@
                     <div class="textsize-l" style="color: #848d9f">shortinvaders.com</div>
                     <br />
                     <a
-                        href="#copiacondividi"
+                        href="#copiacondividi" onclick="ga('send', 'event', 'Copia Condividi', 'click');"
                         data-clipboard-text="https://shortinvaders.com"
                         class="button-lg-flat button-green"
                         >COPIA LINK</a
                     >
                     <a
-                        href="#chiudicondividi"
+                        href="#chiudicondividi" onclick="ga('send', 'event', 'Chiudi Condividi', 'click');"
                         onclick="hideModal('modal-shere');"
                         class="button-lg-flat button-red"
                         >CHIUDI</a
@@ -252,7 +252,7 @@
                     <a
                         href="#play"
                         class="button-lg-flat button-green"
-                        onclick="hideModal('modal-tutorial'); startGame();"
+                        onclick="hideModal('modal-tutorial'); startGame(); ga('send', 'event', 'Play', 'click');"
                         >Gioca</a
                     >
                 </div>
@@ -273,7 +273,7 @@
                     <img src="assets\img\buttons\teslaLogo.png" alt="" />
                     <div class="textsize-l">Ruota il dispositivo.</div>
                     <br />
-                    <a href="" class="button-lg-flat button-green"
+                    <a href="" onclick="ga('send', 'event', 'Rigioca', 'click');" class="button-lg-flat button-green"
                         >OK HO GIRATO IL DISPOSITIVO</a
                     >
                 </div>
