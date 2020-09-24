@@ -554,7 +554,7 @@ function startGame() {
 }
 
 // ScoreBoard Logic //
-const SCOREBOARD_SERVER_IP = "https://api.shortinvaders.com"; // URL of the backend server
+const SCOREBOARD_SERVER_IP = "https://shortinvaders.com/back-uutfgy772yv7saaxcyauu8"; // URL of the backend server
 
 function setScore(score, name) {
     var xhttp = new XMLHttpRequest();
