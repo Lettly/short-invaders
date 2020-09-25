@@ -84,7 +84,7 @@
                     <br />
                     <a
                         data-clipboard-target="#codice-sconto"
-                        class="button-lg-flat button-green" onclick="alert('Codice sconto copiato!')"
+                        class="button-lg-flat button-green"
                         >Copia codice</a
                     >
                     <a
@@ -289,7 +289,13 @@
         <!-- Copy to clipboard (clipboard.js) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
         <script>
-            new ClipboardJS("a");
+            var clipboard = new ClipboardJS("a");
+            clipboard.on('success', function(e) {
+                alert('Codice copiato!')
+
+                e.clearSelection();
+            });
+
         </script>
         <!-- Disable zoom -->
         <script>
