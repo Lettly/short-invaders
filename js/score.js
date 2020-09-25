@@ -23,11 +23,19 @@ function setMaxScore(data) {
     //Se non viene passata la classifica la richiede
     if (data === undefined) {
         getScoreBorad().then((data) => {
-            max_score = data[data.length - 1].score;
+            if (data.length < 10) {
+                max_score = 0;
+            } else {
+                max_score = data[data.length - 1].score;
+            }
         });
     } else {
         //Altrimenti usa quella che gli viene passata
-        max_score = data[data.length - 1].score;
+        if (length < 10) {
+            max_score = 0;
+        } else {
+            max_score = data[data.length - 1].score;
+        }
     }
 }
 

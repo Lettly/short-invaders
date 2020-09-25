@@ -275,63 +275,18 @@ function updateEnemies(dt, $container) {
     switch (true) {
         case (GAME_STATE.level > 0 && GAME_STATE.level <= 10):
             dy = dt * (ENEMY_SPEED * ((GAME_STATE.level-0) * 0.35));
-            console.log(ENEMY_SPEED * ((GAME_STATE.level-0) * 0.35));
             break;
         case (GAME_STATE.level > 10 && GAME_STATE.level <= 20):
             dy = dt * (ENEMY_SPEED * (((GAME_STATE.level-10) * 0.25)+(3.5)));
-            console.log((ENEMY_SPEED * (((GAME_STATE.level-10) * 0.25)+(3.5))));
             break;
         case (GAME_STATE.level > 20 && GAME_STATE.level <= 30):
             dy = dt * (ENEMY_SPEED * (((GAME_STATE.level-20) * 0.15)+(6)));
-            console.log((ENEMY_SPEED * (((GAME_STATE.level-20) * 0.15)+(6))));
             break;
         default:
             dy = dt * (ENEMY_SPEED * (((GAME_STATE.level-20) * 0.15)+(6)));
-            console.log((ENEMY_SPEED * (((GAME_STATE.level-20) * 0.15)+(6))));
             break;
     }
     
-    // switch (GAME_STATE.level) {
-    //     case 1: //Level 1
-    //         dy = dt * ENEMY_SPEED;
-    //         break;
-    //     case 2: //Level 2
-    //         dy = dt * (ENEMY_SPEED * 1.5);
-    //         break;
-    //     case 3: //Level 3
-    //         dy = dt * (ENEMY_SPEED * 2);
-    //         break;
-    //     case 4: //Level 4
-    //         dy = dt * (ENEMY_SPEED * 2.5);
-    //         break;
-    //     case 5: //Level 5
-    //         dy = dt * (ENEMY_SPEED * 2.75);
-    //         break;
-    //     case 6: //Level 6
-    //         dy = dt * (ENEMY_SPEED * 3);
-    //         break;
-    //     case 7: //Level 7
-    //         dy = dt * (ENEMY_SPEED * 3.25);
-    //         break;
-    //     case 8: //Level 8
-    //         dy = dt * (ENEMY_SPEED * 3.5);
-    //         break;
-    //     case 9: //Level 9
-    //         dy = dt * (ENEMY_SPEED * 3.75);
-    //         break;
-    //     case 10: //Level 10
-    //         dy = dt * (ENEMY_SPEED * 4);
-    //         break;
-    //     case 11: //Level 11
-    //         dy = dt * (ENEMY_SPEED * 4.25);
-    //         break;
-    //     default:
-    //         //Max speed
-    //         dy = dt * (ENEMY_SPEED * 4.5);
-    //         break;
-    // }
-    // dy = dt * (ENEMY_SPEED * (1+(0.25*GAME_STATE.level)));
-
     // For each enemy
     for (let i = 0; i < enemies.length; i++) {
         const enemy = enemies[i];
